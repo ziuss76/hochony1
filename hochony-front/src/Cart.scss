@@ -1,0 +1,108 @@
+th, td {
+    vertical-align : middle;
+  }
+  
+  @mixin 버튼() {
+      appearance: button;
+      border: solid transparent;
+      border-radius: 16px;
+      border-width: 0 0 4px;
+      box-sizing: border-box;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-family: din-round,sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      line-height: 20px;
+      margin: 3px;
+      outline: none;
+      overflow: visible;
+      padding: 10px 13px;
+      text-align: center;
+      text-transform: uppercase;
+      touch-action: manipulation;
+      transform: translateZ(0);
+      transition: filter .2s;
+      user-select: none;
+      -webkit-user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+    .buttonBlue {
+      @include 버튼();
+      background-color: #1899D6;
+      width: 100px;
+    }
+    .buttonGray {
+      @include 버튼();
+      background-color: #353535;
+      width: 100px;
+    }
+    .buttonOrange {
+      @include 버튼();
+      background-color: rgb(207, 82, 24);
+      border-radius: 18px;
+      padding: 6px 3px;
+      width: 40px;
+    }
+    .buttonGreen {
+      @include 버튼();
+      background-color: rgb(57, 158, 99);
+      border-radius: 18px;
+      padding: 6px 3px;
+      width: 39px;
+    }
+    .buttonYellow {
+      @include 버튼();
+      background-color: rgb(233, 175, 17);
+      padding: 7px 14px;
+      margin-bottom: 25px;
+      width: 100px;
+      color: #494949;
+    }
+    @mixin 버튼애프터() {
+      background-clip: padding-box;
+      border: solid transparent;
+      border-radius: 16px;
+      border-width: 0 0 4px;
+      bottom: -4px;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+    .buttonBlue:after {
+      @include 버튼애프터();
+      background-color: #1CB0F6;
+    }
+    .buttonGray:after {
+      @include 버튼애프터();
+      background-color: #414141;
+    }
+    .buttonOrange:after {
+      @include 버튼애프터();
+      background-color: rgb(247, 117, 31);
+    }
+    .buttonGreen:after {
+      @include 버튼애프터();
+      background-color: rgb(77, 216, 135);
+    }
+    .buttonYellow:after {
+      @include 버튼애프터();
+      background-color: #fcd705;
+    }
+    button:main,
+    button:focus {
+      user-select: auto;
+    }
+    button:hover:not(:disabled) {
+      filter: brightness(1.1);
+    }
+    button:disabled {
+      cursor: auto;
+    }
