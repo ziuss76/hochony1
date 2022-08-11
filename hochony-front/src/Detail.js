@@ -33,7 +33,7 @@ function Detail(props){
       <><Container>
             <div className="mx-auto col-md-4">
               <img
-                src={"/images/hochony" + (찾은상품.id + 115) + ".jpg"
+                src={"https://ziuss76.github.io/images/hochony" + (찾은상품.id + 115) + ".jpg"
                 }
                 className="product" width="94%"
               />

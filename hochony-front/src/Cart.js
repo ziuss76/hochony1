@@ -23,7 +23,7 @@ function Cart() {
         <tbody>
         { state.cart[0] === undefined ? null : state.cart.map((a,i)=>
                 <tr key={i}>
-                <td>{<img src={"/images/hochony" + (i + 115) + ".jpg"} width="75px"/>}</td>
+                <td>{<img src={"https://ziuss76.github.io/images/hochony" + (i + 115) + ".jpg"} width="75px"/>}</td>
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
                   <td><button className="buttonOrange" role="button" onClick={
