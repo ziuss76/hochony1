@@ -3,7 +3,7 @@ export default [
       id: 0,
       title: "This is my seat",
       content: "Go get my snack then I will move",
-      price: 12000,
+      price: 120,
       quan: 100
     },
   
@@ -11,7 +11,7 @@ export default [
       id: 1,
       title: "Eat my feet human",
       content: "It is not high five",
-      price: 11000,
+      price: 110,
       quan: 100
     },
   
@@ -19,7 +19,7 @@ export default [
       id: 2,
       title: "Too bright here",
       content: "But still I can hear you",
-      price: 13000,
+      price: 130,
       quan: 100
     },
   ];

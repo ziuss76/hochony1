@@ -4,7 +4,7 @@
       "id" : 3,
       "title" : "Feeling safe here",
       "content" : "You can't touch this",
-      "price" : 11000,
+      "price" : 110,
       "quan" : 100
     },
     {
@@ -12,7 +12,7 @@
       "id" : 4,
       "title" : "That looks tasty",
       "content" : "Go get me some",
-      "price" : 12000,
+      "price" : 120,
       "quan" : 100
     },
     {
@@ -20,7 +20,7 @@
       "id" : 5,
       "title" : "So comfy here",
       "content" : "Don't you dare move",
-      "price" : 14000,
+      "price" : 140,
         "quan" : 100
     },
     {
@@ -28,15 +28,15 @@
       "id" : 6,
         "title" : "I don't care",
         "content" : "Don't pet me now",
-        "price" : 11000,
+        "price" : 110,
         "quan" : 100
     },
     {
       "_id" : 7,  
       "id" : 7,
-        "title" : "Because I found perfect spot",
-        "content" : "spot for my paws",
-        "price" : 12000,
+        "title" : "I found perfect spot",
+        "content" : "Spot for my paws",
+        "price" : 120,
         "quan" : 100
     },
     {
@@ -44,7 +44,7 @@
       "id" : 8,
         "title" : "I am Hophinx",
         "content" : "Now build me snack pyramids",
-        "price" : 14000,
+        "price" : 140,
         "quan" : 100
     },
     {
@@ -52,7 +52,7 @@
       "id" : 9,
         "title" : "This is unstable to sleep",
         "content" : "Make me a better spot",
-        "price" : 11000,
+        "price" : 110,
         "quan" : 100
     },
     {
@@ -60,7 +60,7 @@
       "id" : 10,
         "title" : "I feel gooood smelling the stick",
         "content" : "So mysteriouss..",
-        "price" : 12000,
+        "price" : 120,
         "quan" : 100
     },
     {
@@ -68,7 +68,7 @@
       "id" : 11,
         "title" : "Hello little bird",
         "content" : "Wanna play somewhere else?",
-        "price" : 14000,
+        "price" : 140,
         "quan" : 100
     },
     {
@@ -76,7 +76,7 @@
       "id" : 12,
           "title" : "What are you doing",
           "content" : "Don't do it without me",
-          "price" : 11000,
+          "price" : 110,
         "quan" : 100
     },
     {
@@ -84,7 +84,7 @@
       "id" : 13,
           "title" : "Spidercat, Spidercat..♬",
           "content" : "Please don't look at me like that",
-          "price" : 12000,
+          "price" : 120,
         "quan" : 100
     },
     {
@@ -92,15 +92,15 @@
       "id" : 14,
           "title" : "Zzz",
           "content" : "zzz",
-          "price" : 14000,
+          "price" : 140,
         "quan" : 100
     },
     {
       "_id" : 15,  
       "id" : 15,
         "title" : "What are you looking at",
-        "content" : "...what tongue?",
-        "price" : 11000,
+        "content" : "...What tongue?",
+        "price" : 110,
         "quan" : 100
       },
       {
@@ -108,7 +108,7 @@
         "id" : 16,
         "title" : "You look uglier today",
         "content" : "So true that",
-        "price" : 12000,
+        "price" : 120,
           "quan" : 100
       },
       {
@@ -116,7 +116,7 @@
         "id" : 17,
         "title" : "I am hunting something",
         "content" : "So just stay there",
-        "price" : 14000,
+        "price" : 140,
           "quan" : 100
       },
       {
@@ -124,7 +124,7 @@
         "id" : 18,
           "title" : "You want to play the piano?",
           "content" : "Not a chance",
-          "price" : 11000,
+          "price" : 110,
           "quan" : 100
       },
       {
@@ -132,7 +132,7 @@
         "id" : 19,
           "title" : "Too brignt here but",
           "content" : "I can still see you human",
-          "price" : 12000,
+          "price" : 120,
           "quan" : 100
       },
       {
@@ -140,7 +140,7 @@
         "id" : 20,
           "title" : "Hmm...",
           "content" : "This is my spot from now on",
-          "price" : 14000,
+          "price" : 140,
           "quan" : 100
       },
       {
@@ -148,23 +148,23 @@
         "id" : 21,
           "title" : "Hey human, pet me now",
           "content" : "I said now",
-          "price" : 11000,
+          "price" : 110,
           "quan" : 100
       },
       {
         "_id" : 22,  
         "id" : 22,
           "title" : "Spidercat can do everything",
-          "content" : "even this beautiful pose",
-          "price" : 12000,
+          "content" : "Even this beautiful pose",
+          "price" : 120,
           "quan" : 100
       },
       {
         "_id" : 23,  
         "id" : 23,
-          "title" : "Namchinjjal?",
-          "content" : "What is that?",
-          "price" : 14000,
+          "title" : "I am not sleeping yet",
+          "content" : "Don't even think about my paws",
+          "price" : 140,
           "quan" : 100
       },
       {
@@ -172,7 +172,7 @@
         "id" : 24,
             "title" : "What is that thing on ceiling?",
             "content" : "Never mind it was a ghost",
-            "price" : 11000,
+            "price" : 110,
           "quan" : 100
       },
       {
@@ -180,7 +180,7 @@
         "id" : 25,
             "title" : "It's too bright, human",
             "content" : "Pull the curtains now",
-            "price" : 12000,
+            "price" : 120,
           "quan" : 100
       },
       {
@@ -188,7 +188,7 @@
         "id" : 26,
             "title" : "This water tastes so fresh",
             "content" : "Wait, is this your cup?",
-            "price" : 14000,
+            "price" : 140,
           "quan" : 100
       },
       {
@@ -196,7 +196,7 @@
         "id" : 27,
         "title" : "So this is what I was chasing",
         "content" : "It's longer than I thought",
-        "price" : 11000,
+        "price" : 110,
           "quan" : 100
   },
   {
@@ -204,7 +204,7 @@
     "id" : 28,
         "title" : "If I can fly away...",
         "content" : "I would kill that bird instantly",
-        "price" : 12000,
+        "price" : 120,
       "quan" : 100
   },
   {
@@ -212,7 +212,7 @@
     "id" : 29,
         "title" : "It fits so perfectly",
         "content" : "Feel like I was born in here",
-        "price" : 14000,
+        "price" : 140,
       "quan" : 100
   }
   ]
