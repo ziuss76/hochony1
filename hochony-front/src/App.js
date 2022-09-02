@@ -1,6 +1,6 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Container, Nav, Form, FormControl, Carousel} from "react-bootstrap";
+import { Navbar, Container, Nav, Form, FormControl, Carousel, InputGroup} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
@@ -15,11 +15,12 @@ import axios from "axios";
 
 function App() { 
   let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
+  let [검색, 검색변경] = useState('');
   let [더보기, 더보기변경] = useState(true);
 
   return (
     <div className="App">
-      <Navbar bg="light" variant="light">
+      <Navbar sticky="top" bg="light" variant="light">
       <Container fluid> 
       <Navbar.Brand href="/">
         <img
@@ -30,23 +31,43 @@ function App() {
           className="hochoicon"
         />
         </Navbar.Brand>
-        <Form className="d-flex"> 
-        <FormControl
-          type="search"
-          className="me-1"
-          placeholder=" Hochony Shop"
-          aria-label="Search"
-          size="sm"
-          style={{ width: '8.5rem' }}
+        <Container className='col-md-4'>
+        <InputGroup
+        onChange={(e)=>{
+          e.preventDefault();
+          검색변경(e.target.value);
+          console.log(e.target.value)}}>
+        <Form.Control
+          placeholder="Hochony Shop"
         />
-        <button className="buttonSearch"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/></button>
-      </Form>
+        <button type="search"
+          className="me-1 buttonSearch"
+          size="sm"
+          style={{ width: '3rem' } }
+          onClick={() => {
+          axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
+            .get('/search?value=' + 검색) //get 요청 할 주소
+            .then((result) => {
+              console.log(result.data);
+              //then 은 요청 성공시 실행할 코드, result.data 는 받아온 데이터
+              hochony변경([...result.data]);
+              더보기변경(false);
+            })
+            .catch(() => {
+              //catch 는 요청 실패시 실행할 코드
+              console.log("불러오기 실패!");
+            });
+        }}
+        >
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/></button>
+      </InputGroup>
+      </Container>
       
     {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
     <Nav className="me-1">
       <div className="icon" >
-      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} size="lg" className="cart"/></Nav.Link>
-      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} size="lg" className="info"/></Nav.Link>
+      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} size="xl" className="cart"/></Nav.Link>
+      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} size="xl" className="info"/></Nav.Link>
       </div>
     </Nav>
       
@@ -67,7 +88,7 @@ function Main(props) {
   return (
     <>
     <Container className="col-md-8"> 
-          <Carousel className="m-3 Carousel">
+          <Carousel className="m-5 Carousel">
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
@@ -75,8 +96,8 @@ function Main(props) {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>1 day delivery</h3>
-                <h5>싱싱한 새벽배송</h5>
+                <h3>자, 이제 당신도 호집사</h3>
+                <h5>젤리맛좀 볼테야?</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={1500}>
@@ -86,8 +107,8 @@ function Main(props) {
                 alt="Second slide"
               />
               <Carousel.Caption>
-              <h3>Welcome Sale 30%</h3>
-                <h5>자, 당신도 이제 호집사</h5>
+              <h3>1 day delivery</h3>
+                <h5>싱싱한 새벽배송</h5>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={3000}>
@@ -97,8 +118,8 @@ function Main(props) {
                 alt="Third slide"
               />
               <Carousel.Caption>
-              <h3>20% Season Off</h3>
-                <h5>선주문 후뚜맞</h5>
+              <h3>호천이를 팔 수는 없고</h3>
+                <h5>귀여움이라도 팔아보겠다고 만든 앱</h5>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
@@ -121,7 +142,7 @@ onClick={() => {
     .then((result) => {
       console.log(result.data);
       //then 은 요청 성공시 실행할 코드, result.data 는 받아온 데이터
-      props.hochony변경([...props.hochony, ...result.data]); //data 카피본에 추가적으로 data2 카피본 넣기
+      props.hochony변경([...result.data]); //data 카피본에 추가적으로 data2 카피본 넣기
       props.더보기변경(false);
     })
     .catch(() => {
@@ -150,7 +171,7 @@ function Card(props) {
         src={"https://ziuss76.github.io/images/hochony" + (props.i + 115) + ".jpg"
         
         }
-        alt="" width="94%"
+        alt="" width="90%"
       />
       <div className="product-box"
       onClick={() => {

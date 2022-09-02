@@ -36,3 +36,21 @@ app.get('/content', function(요청, 응답){
       응답.json(결과);
     });
 });
+
+app.get('/search', function(요청, 응답){
+  let 검색조건 = [
+    {
+      $search: {
+        index: 'titleSearch',
+        text: {
+          query: 요청.query.value,
+          path: ['title', 'content']  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+        }
+      }
+    }
+  ] 
+  db.collection('Data').aggregate(검색조건).toArray(function(에러, 결과){
+    console.log(결과);
+    응답.json(결과);
+  })
+})

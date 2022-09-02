@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Nav, Container } from "react-bootstrap";
+import { Nav, Container} from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import "./Detail.css";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ function Detail(props){
     let [스위치, 스위치변경] = useState(false);
 
     useEffect(() => {
-        let 타이머 = setTimeout(() => {alert변경(false);}, 3000);
+        let 타이머 = setTimeout(() => {alert변경(false);}, 1200);
         return () => { 
           clearTimeout(타이머); //2초 전에 나갔을 때 버그 방지용, 이 전 타이머 꺼서 중첩 방지
         };
@@ -89,7 +89,7 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            배송시작
+            구매후기(265)
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -100,7 +100,7 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            교환 / 환불
+            배송 안내
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -112,17 +112,13 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            구매후기(265)
+            교환 / 환불
           </Nav.Link>
         </Nav.Item>
         
       </Nav>
       </Container>
-
-      <CSSTransition in={스위치} className="pop" timeout={500}>
         <TabComponent 누른탭={누른탭} 스위치변경={스위치변경} />
-      </CSSTransition>
-
           </>
           )
 };
@@ -132,11 +128,105 @@ function TabComponent(props) {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
     if (props.누른탭 === 0) {
-      return <div className="detail-content">저녁8시이전 주문시 새벽배송!</div>;
+      return <div className="product-box">여기에 별점 & 리뷰 기능 추가</div>
     } else if (props.누른탭 === 1) {
-      return <div className="detail-content">한번 간택 당하면 빠꾸 그런거 없습니다ㅅㄱ</div>;
+      return <div className="product-box">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingOne">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+      배송지를 변경하고 싶어요.
+    </button>
+  </h2>
+  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+      <h5>주문 내역에서 배송지 수정을 눌러 주세요! (기본배송지 X)</h5><br></br>
+          <p>홈페이지 마이페이지 내의 주문 내역에서 배송지 수정을 눌러주시면 변경 가능합니다.</p>
+          <p>다만, 발주가 시작하지 않은 결제완료 상태의 주문만 홈페이지에서 배송지 수정이 가능합니다.</p>
+          <p>변경이 어려운 경우, 고객센터로 문의주시면 확인 후 안내 도와드리겠습니다.</p>
+        </div>
+  </div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingTwo">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+      언제 배송이 시작되나요?
+    </button>
+  </h2>
+  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+      <h5>평일 낮 12시 이전까지 주문해주시면 빠르게 받으실 수 있어요!</h5><br></br>
+          <p>평일 낮 12시 이전 주문 해주시면 당일 출고가 시작 됩니다.</p>
+          <p>낮 12시 이후 결제건은 익일 출고가 시작됩니다.</p>
+          <p>주말과 공휴일에 주문한 경우, 영업일이 시작하면 출고가 시작됩니다.</p>
+        </div>
+  </div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingThree">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+      어떤 택배사로 배송되나요?
+    </button>
+  </h2>
+  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+    <h5>Hochony Shop 제품은 HD(호천이딜리버리)를 통해 배송됩니다.</h5><br></br>
+          <p>배송불가 지역인 경우 분류작업 후 타 택배사로 출고를 요청하고 있습니다만,</p>
+          <p>배송이 다소 지연되는 점 너른 양해 바랍니다.</p>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
     } else if (props.누른탭 === 2) {
-      return <div className="detail-content">어마어마한 앙큼boy네요 <br/> 저 요염한 빵댕이 뚜들기러 가봐야돼서 그럼이만</div>;
+      return <div className="product-box">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingOne">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+    상품을 교환/반품하고 싶어요.
+    </button>
+  </h2>
+  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+      <h5>호천님의 귀여움은 한번 간택당하면 빠꾸 없는 게 국룰입니다만,</h5><br></br>
+          <p>호천님의 넓은 아량으로, 단순 변심에 의한 환불은 제품 수령 후 14일 이내까지 가능합니다.</p>
+          <p>단, 단순 변심으로 인한 반품 및 교환시 왕복 배송비 5,000원이 발생됩니다.</p>
+          <p>제품이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.</p>
+        </div>
+  </div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingTwo">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+    접수한 교환/반품을 취소하고 싶어요.
+    </button>
+  </h2>
+  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+      <h5>홈페이지에서 접수하거나, 고객센터로 연락주세요.</h5><br></br>
+          <p>교환/반품 접수 후 취소를 원하실 경우, 마이페이지 주문내역에서 신청해주세요.</p>
+          <p>홈페이지 신청이 어려우신 경우, 고객센터로 연락 주시면 확인 후 취소 도와드리겠습니다.</p>
+          
+        </div>
+  </div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingThree">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+    반품/취소했는데 금액은 언제 환불되나요?
+    </button>
+  </h2>
+  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+    <div class="accordion-body">
+    <h5>반품 완료 후 영업일 기준 5일 내로 환불이 완료됩니다.</h5><br></br>
+          <p>반품 접수 완료 이후, 통상적으로 영업일 기준 1~3일 정도 소요됩니다.</p>
+          <p>다만, 카드사 및 결제사의 사정에 따라 1~2일 정도 추가로 소요될 수 있습니다.</p>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
     }
   }
   

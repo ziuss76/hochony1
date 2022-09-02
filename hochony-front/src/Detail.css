@@ -18,11 +18,12 @@
     max-width: 460px;
     position: relative;
     cursor: pointer;
-    transform: rotate(-2deg);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
     margin:auto;
+    animation-name: wiggle;
+    animation-duration: 2s;
   }
   
   .my-alert:focus {
@@ -43,14 +44,29 @@
     bottom: 1px;
     left: 1px;
   }
-  
-  .pop-enter {
-    opacity: 0;
-  } 
-  
-  .pop-enter-active {
-    opacity: 1;
-    transition: all 500ms;
+
+  @keyframes wiggle {
+    0%, 7% {
+      transform: rotateZ(0);
+    }
+    15% {
+      transform: rotateZ(-10deg);
+    }
+    20% {
+      transform: rotateZ(5deg);
+    }
+    25% {
+      transform: rotateZ(-6deg);
+    }
+    30% {
+      transform: rotateZ(3deg);
+    }
+    35% {
+      transform: rotateZ(-2deg);
+    }
+    40%, 100% {
+      transform: rotateZ(0);
+    }
   }
   
   .product {
