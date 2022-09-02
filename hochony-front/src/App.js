@@ -1,6 +1,6 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Container, Nav, Form, FormControl, Carousel, InputGroup} from "react-bootstrap";
+import { Navbar, Container, Nav, Form, Carousel, InputGroup} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ function App() {
             });
         }}
         >
-          <FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/></button>
+        <FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/></button>
       </InputGroup>
       </Container>
       
@@ -87,7 +87,7 @@ function App() {
 function Main(props) {
   return (
     <>
-    <Container className="col-md-8"> 
+    <Container className="col-md-10"> 
           <Carousel className="m-5 Carousel">
             <Carousel.Item interval={1500}>
               <img
@@ -137,16 +137,14 @@ function Main(props) {
 className="buttonYellow"
 style={{width: 85}}
 onClick={() => {
-  axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
-    .get('/content') //get 요청 할 주소
+  axios
+    .get('/content')
     .then((result) => {
       console.log(result.data);
-      //then 은 요청 성공시 실행할 코드, result.data 는 받아온 데이터
-      props.hochony변경([...result.data]); //data 카피본에 추가적으로 data2 카피본 넣기
+      props.hochony변경([...result.data]);
       props.더보기변경(false);
     })
     .catch(() => {
-      //catch 는 요청 실패시 실행할 코드
       console.log("불러오기 실패!");
     });
 }}
@@ -158,10 +156,8 @@ onClick={() => {
   )
 }
 
-
 function Card(props) {
   let navigate = useNavigate();
-  
   return (
     <div className="col-md-4">
       <img

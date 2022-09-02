@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Nav, Container} from "react-bootstrap";
-import { CSSTransition } from "react-transition-group";
 import "./Detail.css";
 import { useDispatch } from "react-redux";
 import { addItem } from "./store";
+import axios from "axios";
 
 function Detail(props){
     let dispatch = useDispatch();
@@ -56,6 +56,7 @@ function Detail(props){
                     addItem({ id: 찾은상품.id, name: 찾은상품.title, quan: 1})
                   );
                   navigate("/cart");
+                  axios.post("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))
                 }}
               >
                 장바구니

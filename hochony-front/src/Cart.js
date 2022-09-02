@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Cart.scss";
 import { addCount, subCount } from "./store";
+import axios from "axios";
 
 function Cart() {
 
@@ -27,10 +28,12 @@ function Cart() {
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
                   <td><button className="buttonOrange" role="button" onClick={
-                   ()=>{dispatch(addCount(a.id))}}>
+                   ()=>{dispatch(addCount(a.id))
+                    axios.put("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))}}>
                           +1</button>
                 <button className="buttonGreen" role="button" onClick={
-                      ()=>{dispatch(subCount(a.id))}}>
+                      ()=>{dispatch(subCount(a.id))
+                        axios.put("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))}}>
                           -1</button>
                 </td>
                 </tr>

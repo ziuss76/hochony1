@@ -54,3 +54,17 @@ app.get('/search', function(요청, 응답){
     응답.json(결과);
   })
 })
+
+app.post('/cart', function(요청, 응답){
+  응답.send('전송완료');
+  db.collection('cartState').insertOne(state.cart, function(){
+    console.log('저장완료')
+  });
+});
+
+app.put('/cart', function(요청, 응답){
+  db.collection('cartState').updateOne(state.cart, function(){
+    console.log('수정완료')
+    응답.redirect('/cart')
+  });
+});
