@@ -64,7 +64,7 @@ function App() {
       </Container>
       
     {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
-    <Nav className="me-1">
+    <Nav>
       <div className="icon" >
       <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} size="xl" className="cart"/></Nav.Link>
       <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} size="xl" className="info"/></Nav.Link>
@@ -88,7 +88,7 @@ function Main(props) {
   return (
     <>
     <Container className="col-md-10"> 
-          <Carousel className="m-5 Carousel">
+          <Carousel className="my-5 mx-3 Carousel">
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
@@ -96,8 +96,8 @@ function Main(props) {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3>자, 이제 당신도 호집사</h3>
-                <h5>젤리맛좀 볼테야?</h5>
+                <h4>자, 이제 당신도 호집사</h4>
+                <h6>젤리맛좀 볼테야?</h6>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={1500}>
@@ -107,8 +107,8 @@ function Main(props) {
                 alt="Second slide"
               />
               <Carousel.Caption>
-              <h3>1 day delivery</h3>
-                <h5>싱싱한 새벽배송</h5>
+              <h4>이 천사같은 모습</h4>
+                <h6>그냥 지나칠 수 없지</h6>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item interval={3000}>
@@ -118,8 +118,8 @@ function Main(props) {
                 alt="Third slide"
               />
               <Carousel.Caption>
-              <h3>호천이를 팔 수는 없고</h3>
-                <h5>귀여움이라도 팔아보겠다고 만든 앱</h5>
+              <h4>호천이님의</h4>
+                <h6>앙큼한 귀여움을 팔아요</h6>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
