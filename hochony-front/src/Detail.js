@@ -30,8 +30,8 @@ function Detail(props){
     let [찾은상품개수, 찾은상품개수변경] = useState(찾은상품.quan)
 
     return (
-      <><Container>
-            <div className="mx-auto col-md-4">
+      <><Container className="col-md-4">
+            <div className="mx-auto">
               <img
                 src={"https://ziuss76.github.io/images/hochony" + (찾은상품.id + 115) + ".jpg"
                 }
@@ -40,7 +40,7 @@ function Detail(props){
             </div>
             
             <div className="product-box">
-              <h4 className="pt-3">{찾은상품.title}</h4>
+              <h4 className="p-3">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price}원</p>
               <p>재고: {찾은상품개수}</p>
@@ -79,18 +79,17 @@ function Detail(props){
         </div>
       ) : null}
 
-        <Container>
-          <Nav className="mt-3" variant="tabs" defaultActiveKey="link-0">
+        <Container className="col-md-6">
+          <Nav className="mt-2" variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
           <Nav.Link
-          className="mx-3"
             eventKey="link-0"
             onClick={() => {
               누른탭변경(0);
               스위치변경(false);
             }}
           >
-            구매후기(265)
+            구매후기(26)
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -101,12 +100,11 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            배송 안내
+            배송안내
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link
-          className="mx-3"
             eventKey="link-2"
             onClick={() => {
               누른탭변경(2);
@@ -119,7 +117,7 @@ function Detail(props){
         
       </Nav>
       </Container>
-        <TabComponent 누른탭={누른탭} 스위치변경={스위치변경} />
+        <TabComponent 누른탭={누른탭} 스위치변경={스위치변경}/>
           </>
           )
 };
@@ -129,9 +127,9 @@ function TabComponent(props) {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
     if (props.누른탭 === 0) {
-      return <div className="product-box">여기에 별점 & 리뷰 기능 추가</div>
+      return <Container className="col-md-8"><div className="product-box">여기에 별점 & 리뷰 기능 추가</div></Container>
     } else if (props.누른탭 === 1) {
-      return <div className="product-box">
+      return <Container className="col-md-8"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
@@ -178,9 +176,9 @@ function TabComponent(props) {
   </div>
 </div>
 </div>
-    </div>
+    </div></Container>
     } else if (props.누른탭 === 2) {
-      return <div className="product-box">
+      return <Container className="col-md-8"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
@@ -228,6 +226,7 @@ function TabComponent(props) {
 </div>
 </div>
     </div>
+    </Container>
     }
   }
   
