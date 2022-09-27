@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <Navbar sticky="top" bg="light" variant="light">
       <Container fluid> 
-      <Navbar.Brand href="/">
+      <Nav.Link as={Link} to="/">
         <img
           alt=""
           src="https://ziuss76.github.io/hochoicon.svg"
@@ -30,7 +30,7 @@ function App() {
           height="35px"
           className="hochoicon"
         />
-        </Navbar.Brand>
+        </Nav.Link>
         <Container className='col-md-4'>
         <InputGroup
         onChange={(e)=>{
@@ -164,7 +164,7 @@ function Card(props) {
         onClick={() => {
           navigate("/detail/" + props.hochony.id);
         }}
-        src={"https://ziuss76.github.io/images/hochony" + (props.i + 115) + ".jpg"
+        src={"https://ziuss76.github.io/images/hochony" + (props.hochony.id + 115) + ".jpg"
         
         }
         alt="" width="90%"

@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Cart.scss";
 import { addCount, subCount } from "./store";
-import axios from "axios";
 
 function Cart() {
 
   let state = useSelector((state) => state )
   let dispatch = useDispatch()
+  let cartState = localStorage.getItem('cartState');
+  let cartStateArray = JSON.parse(cartState);
   
     return (
       <>
@@ -22,19 +23,16 @@ function Cart() {
         </tr>
         </thead>
         <tbody>
-        { state.cart[0] === undefined ? null : state.cart.map((a,i)=>
+        {
+        cartStateArray[0] === null ? null : cartStateArray.map((a,i)=> //왜 없던 널값이 갑자기 생겨서 화면이 하얗게 변할까?
                 <tr key={i}>
-                <td>{<img src={"https://ziuss76.github.io/images/hochony" + (i + 115) + ".jpg"} width="75px"/>}</td>
+                <td>{<img src={"https://ziuss76.github.io/images/hochony" + (a.id + 115) + ".jpg"} width="75px"/>}</td>
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
                   <td><button className="buttonOrange" role="button" onClick={
-                   ()=>{dispatch(addCount(a.id))
-                    axios.put("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))}}>
-                          +1</button>
+                   ()=>{dispatch(addCount(a.id))}}>+1</button>
                 <button className="buttonGreen" role="button" onClick={
-                      ()=>{dispatch(subCount(a.id))
-                        axios.put("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))}}>
-                          -1</button>
+                      ()=>{dispatch(subCount(a.id))}}>-1</button>
                 </td>
                 </tr>
                 )

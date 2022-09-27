@@ -1,17 +1,9 @@
 .App {
   text-align: center;
 }
-.btn {
-  margin: 3px;
-  margin-bottom: 3px;
-}
 .hochoicon {
   margin-left: 3px;
   margin-right: 3px;
-  margin-bottom: 1px;
-}
-.home {
-  margin-left: 2px;
   margin-bottom: 1px;
 }
 .cart {
@@ -82,7 +74,6 @@ img {
   font-size: 1rem;
   line-height: 23px;
   outline: none;
-  padding: .75rem;
   text-decoration: none;
   transition: all 235ms ease-in-out;
   border-bottom-left-radius: 15px 255px;
@@ -92,7 +83,7 @@ img {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin: 18px;
+  margin-bottom: 1rem;
 }
 
 .product-box:hover {

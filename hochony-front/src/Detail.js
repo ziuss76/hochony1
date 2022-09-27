@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Nav, Container} from "react-bootstrap";
 import "./Detail.css";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
-import axios from "axios";
 
 function Detail(props){
     let dispatch = useDispatch();
+    let state = useSelector((state) => state )
 
     let [alert, alert변경] = useState(true);
     let [누른탭, 누른탭변경] = useState(0);
     let [스위치, 스위치변경] = useState(false);
 
     useEffect(() => {
-        let 타이머 = setTimeout(() => {alert변경(false);}, 1200);
+        let 타이머 = setTimeout(() => {alert변경(false);}, 1300);
         return () => { 
           clearTimeout(타이머); //2초 전에 나갔을 때 버그 방지용, 이 전 타이머 꺼서 중첩 방지
         };
@@ -27,7 +27,6 @@ function Detail(props){
     let navigate = useNavigate();
     let { id } = useParams(); // {id}는 :id 자리에 있던 숫자
     let 찾은상품 = props.hochony.find((상품) => 상품.id == id); // 상품.id 가 :id 자리의 숫자와 같은 상품을 찾아줌
-    let [찾은상품개수, 찾은상품개수변경] = useState(찾은상품.quan)
 
     return (
       <><Container className="col-md-4">
@@ -38,25 +37,27 @@ function Detail(props){
                 className="product" width="94%"
               />
             </div>
+
+            {alert === true ? (
+        <div className="my-alert">
+          <p>Almost Sold Out ! </p>
+        </div>
+      ) : null}
             
             <div className="product-box">
               <h4 className="p-3">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price}원</p>
-              <p>재고: {찾은상품개수}</p>
+              <p>재고: {찾은상품.quan}</p>
     
               <button
                className = "buttonGreen"
                style={{width:'85px'}}
                 onClick={() => {
-                  찾은상품개수변경(()=>{
-                    찾은상품.quan --;
-                  })
-                  dispatch(
-                    addItem({ id: 찾은상품.id, name: 찾은상품.title, quan: 1})
-                  );
+                    dispatch(
+                      addItem({_id: 찾은상품._id, id: 찾은상품.id, name: 찾은상품.title, quan: 1})
+                    );
                   navigate("/cart");
-                  axios.post("/cart").then((결과) => console.log(결과)).catch(() => console.log("전송 실패!"))
                 }}
               >
                 장바구니
@@ -72,12 +73,6 @@ function Detail(props){
               </button>
           </div>
           </Container>
-
-          {alert === true ? (
-        <div className="my-alert">
-          <p>Almost Sold Out ! </p>
-        </div>
-      ) : null}
 
         <Container className="col-md-6">
           <Nav className="mt-2" variant="tabs" defaultActiveKey="link-0">
