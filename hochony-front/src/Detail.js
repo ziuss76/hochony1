@@ -4,10 +4,12 @@ import { Nav, Container} from "react-bootstrap";
 import "./Detail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
+import RatingIt from "./Rating";
+
 
 function Detail(props){
     let dispatch = useDispatch();
-    let state = useSelector((state) => state )
+    let state = useSelector((state) => state)
 
     let [alert, alert변경] = useState(true);
     let [누른탭, 누른탭변경] = useState(0);
@@ -118,11 +120,17 @@ function Detail(props){
 };
 
 function TabComponent(props) {
+
     useEffect(() => {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
     if (props.누른탭 === 0) {
-      return <Container className="col-md-8"><div className="product-box">여기에 별점 & 리뷰 기능 추가</div></Container>
+      return <Container className="col-md-8"><div className="product-box">
+        
+        여기에 별점 & 리뷰 기능 추가
+        <RatingIt></RatingIt>
+        
+        </div></Container>
     } else if (props.누른탭 === 1) {
       return <Container className="col-md-8"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
