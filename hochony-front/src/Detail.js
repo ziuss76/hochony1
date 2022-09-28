@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Nav, Container} from "react-bootstrap";
+import { Nav, Container, InputGroup, Form} from "react-bootstrap";
 import "./Detail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
 import RatingIt from "./Rating";
+import axios from "axios";
 
 
 function Detail(props){
@@ -121,14 +122,26 @@ function Detail(props){
 
 function TabComponent(props) {
 
+    const [리뷰, 리뷰변경] = useState('');
+
     useEffect(() => {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
     if (props.누른탭 === 0) {
       return <Container className="col-md-8"><div className="product-box">
-        
-        여기에 별점 & 리뷰 기능 추가
         <RatingIt></RatingIt>
+        <InputGroup className="mt-1" 
+        onChange={(e)=>{
+          e.preventDefault();
+          리뷰변경(e.target.value)}}>
+        <Form.Control className="m-3" as="textarea" rows={6} 
+        placeholder="어떤 점이 귀여웠나요? 별점과 함께 10자 이상 작성해주세요!" />
+      </InputGroup>
+      <button className="buttonBlue mb-2" role="button" type="submit"
+      // onClick={() => {axios.post}}
+      >
+              제출하기
+            </button>
         
         </div></Container>
     } else if (props.누른탭 === 1) {
