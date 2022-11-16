@@ -55,4 +55,22 @@ app.get('/search', function(요청, 응답){
   })
 });
 
+app.post('/review', function(요청, 응답){
+  db.collection('ReviewCount').findOne({name : '게시물개수'}, function(에러, 결과){
+    var 총게시물개수 = 결과.totalPost;
+    db.collection('ReviewCount').updateOne( {name : '게시물개수' } , { $inc : { totalPost : 1 } } , function(에러, 결과){
+      db.collection('Review').insertOne( { _id : (총게시물개수 + 1), 점수 : 요청.body[0], 내용 : 요청.body[1], } , function(){
+        응답.send('전송완료');
+      });
+    })
+  });
+});
+
+app.get('/getReview', function(요청, 응답){
+  db.collection('Review').find().toArray(function(에러, 결과){
+    console.log(결과);
+    응답.json(결과);
+  });
+});
+
 // nodemon server.js

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Nav, Container, InputGroup, Form} from "react-bootstrap";
+import { Nav, Container, InputGroup, Form, Modal, Card} from "react-bootstrap";
 import "./Detail.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
-import RatingIt from "./Rating";
 import axios from "axios";
+import { Rating } from 'react-simple-star-rating'
 
 
 function Detail(props){
@@ -123,13 +123,31 @@ function Detail(props){
 function TabComponent(props) {
 
     const [리뷰, 리뷰변경] = useState('');
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+
+    const [rating, setRating] = useState(0) // initial rating value
+    const handleRating = (rate) => {
+    setRating(rate)
+  }
+    const [서버리뷰, 서버리뷰변경] = useState([]);
 
     useEffect(() => {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
+
+    useEffect(() => {
+      axios.get("/getReview").then((result) => {
+        서버리뷰변경([...result.data]);
+        console.log(서버리뷰);
+      })
+    }, []);
+
+
     if (props.누른탭 === 0) {
-      return <Container className="col-md-8"><div className="product-box">
-        <RatingIt></RatingIt>
+      return <Container className="col-md-8">
+        <div className="product-box">
+        <Rating onClick={handleRating} rating={rating}/>
         <InputGroup className="mt-1" 
         onChange={(e)=>{
           e.preventDefault();
@@ -138,12 +156,44 @@ function TabComponent(props) {
         placeholder="어떤 점이 귀여웠나요? 별점과 함께 10자 이상 작성해주세요!" />
       </InputGroup>
       <button className="buttonBlue mb-2" role="button" type="submit"
-      // onClick={() => {axios.post}}
-      >
-              제출하기
-            </button>
+       onClick={
+        () => {
+        axios.post("/review", [rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log([rating, 리뷰]))
         
-        </div></Container>
+        setShow(true);
+      }}
+      >제출하기</button>
+      </div>
+
+
+      {서버리뷰.map((a,i)=>{ return <div className="product-box p-4 m-1">
+        <Rating size={30} initialValue={서버리뷰[i].점수} readonly={true}
+        />
+        <Card className="mt-3">
+      <Card.Body>
+        <Card.Title>{i + 1} 번째 리뷰</Card.Title>
+        <Card.Text>
+          {서버리뷰[i].내용}
+        </Card.Text>
+      </Card.Body>
+    </Card>
+        </div>})}
+        
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>호천이가 당신의 리뷰를 고마워합니다!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>고맙다 휴먼, 너에게 내 총애를 선사하지!😼</Modal.Body>
+          <Modal.Footer>
+            <button className="buttonGray" role="button" onClick={handleClose}>
+              닫기
+            </button>
+          </Modal.Footer>
+        </Modal>
+        
+        </Container>
+
     } else if (props.누른탭 === 1) {
       return <Container className="col-md-8"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
