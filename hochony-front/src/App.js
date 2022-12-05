@@ -141,7 +141,7 @@ onClick={() => {
     .get('/content')
     .then((result) => {
       console.log(result.data);
-      props.hochony변경([...result.data]);
+      props.hochony변경([...result.data.sort((a,b)=> a.id - b.id)]);
       props.더보기변경(false);
     })
     .catch(() => {
