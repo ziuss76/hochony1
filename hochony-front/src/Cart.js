@@ -9,7 +9,7 @@ function Cart() {
   let state = useSelector((state) => state )
   let dispatch = useDispatch()
   let cartState = localStorage.getItem('cartState');
-  let cartStateArray = JSON.parse(cartState);
+  let cartStateArray = JSON.parse(cartState) || [];
   
     return (
       <>
