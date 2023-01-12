@@ -66,8 +66,8 @@ function App() {
     {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
     <Nav>
       <div className="icon" >
-      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} size="xl" className="cart"/></Nav.Link>
-      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} size="xl" className="info"/></Nav.Link>
+      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} className="navicon"/></Nav.Link>
+      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} className="navicon"/></Nav.Link>
       </div>
     </Nav>
       
@@ -76,7 +76,6 @@ function App() {
   {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
   <Routes>
         <Route path="/" element = {<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경}/>}/> 
-        {/* 윗 줄 처럼 exact 안붙여도 하나씩만 작동한다는 뜻. 보여주기 위해 일단은 넣음 */}
         <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/login" element = {<Login/>}/>
@@ -141,7 +140,7 @@ onClick={() => {
     .get('/content')
     .then((result) => {
       console.log(result.data);
-      props.hochony변경([...result.data.sort((a,b)=> a.id - b.id)]);
+      props.hochony변경([...props.hochony, ...result.data.sort((a,b)=> a.id - b.id)]);
       props.더보기변경(false);
     })
     .catch(() => {
@@ -160,7 +159,7 @@ function Card(props) {
   let navigate = useNavigate();
   return (
     <div className="col-md-4">
-      <img
+      <img className='product-img'
         onClick={() => {
           navigate("/detail/" + props.hochony.id);
         }}

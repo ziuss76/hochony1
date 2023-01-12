@@ -6,12 +6,17 @@
   margin-right: 3px;
   margin-bottom: 1px;
 }
-.cart {
+.navicon {
   margin-right: 3px;
+  font-size: x-large;
+  color: salmon;
+
 }
-.info {
-  margin-right: 1px;
+.navicon:hover {
+  transform: translate3d(0, 1.5px, 0);
+  color: rgb(253, 100, 83);
 }
+
 .icon {
   display: flex;
 }
@@ -51,7 +56,10 @@
 }
 
 img {
-  border-radius: 15px;
+  border-radius: 15px; 
+}
+.product-img {
+  /* 캐러셀은 shadow 아래쪽이 좀 이상해져서 작은 상품 이미지는 따로 넣었음 */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
