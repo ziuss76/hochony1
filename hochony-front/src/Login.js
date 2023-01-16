@@ -1,7 +1,6 @@
 import { Modal, Form, Container } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "./Cart.scss";
-
 
 function Login() {
     const [show, setShow] = useState(false);
@@ -12,12 +11,13 @@ function Login() {
       <><Container>
         <img src={"https://ziuss76.github.io/images/hochonylogin.jpg"} className="col-md-6 mt-3" width="94%"/>
         <div className="product-box">
-            어이, 네녀석이 오늘 온다는 신입이냐. <br></br> 일단 이거부터 적어라 <br></br>특별히 막내로 받아주마.
+            어이, 구글로그인으로 끝난 줄 알았나?<br></br>이것도 빨리 적어라.<br></br>그럼 특별히 막내로 받아주마.
         </div>
         </Container>
         <button className="buttonBlue mb-5" role="button" onClick={handleShow}>
           회원가입  
         </button>
+
   
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>

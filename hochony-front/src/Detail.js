@@ -50,8 +50,7 @@ function Detail(props){
             <div className="product-box">
               <h4 className="p-3">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
-              <p>{찾은상품.price}원</p>
-              <p>재고: {찾은상품.quan}</p>
+              <p>{찾은상품.price} won / {찾은상품.quan} units</p>
     
               <button
                className = "buttonGreen"
@@ -121,21 +120,20 @@ function Detail(props){
 };
 
 function TabComponent(props) {
-
-    const [리뷰, 리뷰변경] = useState('');
-    const [show, setShow] = useState(false);
+    
+    const [show, setShow] = useState(false); // 탭
     const handleClose = () => setShow(false);
-
-    const [rating, setRating] = useState(0) // initial rating value
-    const handleRating = (rate) => {
-    setRating(rate)
-  }
-    const [서버리뷰, 서버리뷰변경] = useState([]);
-
     useEffect(() => {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
     });
 
+    const [rating, setRating] = useState(0) // 별점
+    const handleRating = (rate) => {
+    setRating(rate)
+  }
+
+    const [리뷰, 리뷰변경] = useState(''); // 리뷰
+    const [서버리뷰, 서버리뷰변경] = useState([]);
     useEffect(() => {
       axios.get("/getReview").then((result) => {
         서버리뷰변경([...result.data]);
@@ -159,7 +157,6 @@ function TabComponent(props) {
        onClick={
         () => {
         axios.post("/review", [rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log([rating, 리뷰]))
-        
         setShow(true);
       }}
       >제출하기</button>
@@ -191,7 +188,6 @@ function TabComponent(props) {
             </button>
           </Modal.Footer>
         </Modal>
-        
         </Container>
 
     } else if (props.누른탭 === 1) {

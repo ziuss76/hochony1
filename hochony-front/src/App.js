@@ -1,6 +1,6 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Container, Nav, Form, Carousel, InputGroup} from "react-bootstrap";
+import { Navbar, Container, Nav, Form, Carousel, InputGroup, Badge} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
@@ -11,15 +11,19 @@ import Cart from "./Cart.js";
 import Login from "./Login.js";
 import "./Cart.scss";
 import axios from "axios";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 
 function App() { 
   let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
   let [검색, 검색변경] = useState('');
-  let [더보기, 더보기변경] = useState(true);
+  let [더보기, 더보기변경] = useState(false);
+  let [구글로그인, 구글로그인변경] = useState(true);
 
   return (
     <div className="App">
+      
       <Navbar sticky="top" bg="light" variant="light">
       <Container fluid> 
       <Nav.Link as={Link} to="/">
@@ -75,10 +79,10 @@ function App() {
   </Navbar>
   {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
   <Routes>
-        <Route path="/" element = {<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경}/>}/> 
+        <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경}/>}/>
         <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
         <Route path="/cart" element={<Cart/>}/>
-        <Route path="/login" element = {<Login/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </div>
   );
@@ -130,6 +134,23 @@ function Main(props) {
     return <Card hochony={props.hochony[i]} i={i} key={i}/>; //hochony 중에 hochony[i] 만 전송한다
   })}
 </div>
+{props.구글로그인 === true? <div className='googleText'><Badge pill bg="warning" text="dark">
+구글 로그인 하고 더보기! </Badge></div> : null}
+{props.구글로그인 === true? <div className='googleBox'>
+  <GoogleOAuthProvider clientId="847017456881-ammtkj4u2gplukp3a5lmvm7t1kmmv351.apps.googleusercontent.com">
+<GoogleLogin
+          text='signin_with'
+          shape='pill'
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+            props.구글로그인변경(false)
+            props.더보기변경(true)
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+</GoogleOAuthProvider></div> : null}
 
 { props.더보기 === true ?
 <button
@@ -176,7 +197,7 @@ function Card(props) {
       <p>
         {props.hochony.content}
       </p>
-      <p>{props.hochony.price}원 / 재고: {props.hochony.quan}</p>
+      <p>{props.hochony.price} won / {props.hochony.quan} units</p>
     </div>
     </div>
   );
