@@ -15,6 +15,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 
 
+
 function App() { 
   let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
   let [검색, 검색변경] = useState('');
@@ -23,7 +24,6 @@ function App() {
 
   return (
     <div className="App">
-      
       <Navbar sticky="top" bg="light" variant="light">
       <Container fluid> 
       <Nav.Link as={Link} to="/">
@@ -88,6 +88,7 @@ function App() {
   );
 }
 function Main(props) {
+  
   return (
     <>
     <Container className="col-md-10"> 
@@ -137,12 +138,12 @@ function Main(props) {
 {props.구글로그인 === true? <div className='googleText'><Badge pill bg="warning" text="dark">
 구글 로그인 하고 더보기! </Badge></div> : null}
 {props.구글로그인 === true? <div className='googleBox'>
-  <GoogleOAuthProvider clientId="847017456881-ammtkj4u2gplukp3a5lmvm7t1kmmv351.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}>
 <GoogleLogin
           text='signin_with'
           shape='pill'
           onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
+            // console.log(credentialResponse);
             props.구글로그인변경(false)
             props.더보기변경(true)
           }}

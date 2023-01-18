@@ -8,15 +8,15 @@ function Login() {
     const handleShow = () => setShow(true);
   
     return (
-      <><Container>
-        <img src={"https://ziuss76.github.io/images/hochonylogin.jpg"} className="col-md-6 mt-3" width="94%"/>
+      <><Container className="col-md-4">
+        <img src={"https://ziuss76.github.io/images/hochonylogin.jpg"} className="product mt-3" width="94%"/>
         <div className="product-box">
             어이, 구글로그인으로 끝난 줄 알았나?<br></br>이것도 빨리 적어라.<br></br>그럼 특별히 막내로 받아주마.
         </div>
-        </Container>
         <button className="buttonBlue mb-5" role="button" onClick={handleShow}>
           회원가입  
         </button>
+        </Container>
 
   
         <Modal show={show} onHide={handleClose}>
