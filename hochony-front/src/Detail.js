@@ -15,6 +15,7 @@ function Detail(props){
     let [alert, alert변경] = useState(true);
     let [누른탭, 누른탭변경] = useState(0);
     let [스위치, 스위치변경] = useState(false);
+    
 
     useEffect(() => {
         let 타이머 = setTimeout(() => {alert변경(false);}, 1300);
@@ -77,7 +78,7 @@ function Detail(props){
           </Container>
 
         <Container className="col-md-6">
-          <Nav className="mt-2" variant="tabs" defaultActiveKey="link-0">
+          <Nav className="mt-2" fill variant="tabs" defaultActiveKey="link-0">
         <Nav.Item>
           <Nav.Link
             eventKey="link-0"
@@ -86,7 +87,7 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            구매후기(26)
+            구매후기
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
@@ -108,7 +109,7 @@ function Detail(props){
               스위치변경(false);
             }}
           >
-            교환 / 환불
+            교환/반품
           </Nav.Link>
         </Nav.Item>
         
@@ -134,6 +135,7 @@ function TabComponent(props) {
 
     const [리뷰, 리뷰변경] = useState(''); // 리뷰
     const [서버리뷰, 서버리뷰변경] = useState([]);
+
     useEffect(() => {
       axios.get("/getReview").then((result) => {
         서버리뷰변경([...result.data]);
@@ -141,9 +143,8 @@ function TabComponent(props) {
       })
     }, []);
 
-
     if (props.누른탭 === 0) {
-      return <Container className="col-md-8">
+      return <Container className="col-md-7">
         <div className="product-box">
         <Rating onClick={handleRating} rating={rating}/>
         <InputGroup className="mt-1" 
@@ -162,7 +163,6 @@ function TabComponent(props) {
       >제출하기</button>
       </div>
 
-
       {서버리뷰.map((a,i)=>{ return <div className="product-box p-4 m-1">
         <Rating size={30} initialValue={서버리뷰[i].점수} readonly={true}
         />
@@ -176,7 +176,6 @@ function TabComponent(props) {
     </Card>
         </div>})}
         
-
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>호천이가 당신의 리뷰를 고마워합니다!</Modal.Title>
@@ -191,7 +190,7 @@ function TabComponent(props) {
         </Container>
 
     } else if (props.누른탭 === 1) {
-      return <Container className="col-md-8"><div className="product-box">
+      return <Container className="col-md-7"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
@@ -240,7 +239,7 @@ function TabComponent(props) {
 </div>
     </div></Container>
     } else if (props.누른탭 === 2) {
-      return <Container className="col-md-8"><div className="product-box">
+      return <Container className="col-md-7"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
