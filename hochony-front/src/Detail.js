@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
 import axios from "axios";
 import { Rating } from 'react-simple-star-rating'
-
+import CloseButton from 'react-bootstrap/CloseButton';
 
 function Detail(props){
     let dispatch = useDispatch();
@@ -115,7 +115,7 @@ function Detail(props){
         
       </Nav>
       </Container>
-        <TabComponent 누른탭={누른탭} 스위치변경={스위치변경}/>
+        <TabComponent 누른탭={누른탭} 스위치변경={스위치변경} id = {id}/>
           </>
           )
 };
@@ -123,6 +123,12 @@ function Detail(props){
 function TabComponent(props) {
     
     const [show, setShow] = useState(false); // 탭
+    const [modalKind, modalKind변경] = useState('')
+    const [modalTitle, modalTitle변경] = useState('')
+    const [modalBody, modalBody변경] = useState('')
+    const [수정중id, 수정중id변경] = useState(0)
+    const [삭제할것, 삭제할것변경] = useState({})
+
     const handleClose = () => setShow(false);
     useEffect(() => {
       props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
@@ -134,7 +140,7 @@ function TabComponent(props) {
   }
 
     const [리뷰, 리뷰변경] = useState(''); // 리뷰
-    const [서버리뷰, 서버리뷰변경] = useState([]);
+    const [서버리뷰, 서버리뷰변경] = useState([{ _id: 1, '점수': 4, '내용': '호쳐니 기여웡' }]);
 
     useEffect(() => {
       axios.get("/getReview").then((result) => {
@@ -147,7 +153,7 @@ function TabComponent(props) {
       return <Container className="col-md-7">
         <div className="product-box">
         <Rating onClick={handleRating} rating={rating}/>
-        <InputGroup className="mt-1" 
+        <InputGroup className="mt-1"
         onChange={(e)=>{
           e.preventDefault();
           리뷰변경(e.target.value)}}>
@@ -157,8 +163,10 @@ function TabComponent(props) {
       <button className="buttonBlue mb-2" role="button" type="submit"
        onClick={
         () => {
-        axios.post("/review", [rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log([rating, 리뷰]))
+        axios.post("/postReview", [rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log([rating, 리뷰]))
         setShow(true);
+        modalTitle변경('호천이가 당신의 리뷰를 고마워합니다!')
+        modalBody변경('고맙다 휴먼, 너에게 내 총애를 선사하지!😼')
       }}
       >제출하기</button>
       </div>
@@ -168,26 +176,56 @@ function TabComponent(props) {
         />
         <Card className="mt-3">
       <Card.Body>
-        <Card.Title>{i + 1} 번째 리뷰</Card.Title>
+        <Card.Title>{서버리뷰[i]._id} 번째 리뷰</Card.Title>
         <Card.Text>
           {서버리뷰[i].내용}
         </Card.Text>
       </Card.Body>
     </Card>
+    <button className="buttonGreen mt-3" style={{width:'85px'}} type="submit"
+      onClick={() => {
+        setShow(true);
+        수정중id변경(서버리뷰[i]._id)
+        modalKind변경('수정')
+        modalTitle변경('호천이가 수정을 허락했습니다!')
+        modalBody변경(<Container><Rating onClick={handleRating} rating={rating}/><InputGroup className="mt-1"
+        onChange={(e)=>{
+          e.preventDefault();
+          리뷰변경(e.target.value)}}><Form.Control as="textarea" rows={6} 
+        placeholder="수정할 내용으로 적어주세요!"/></InputGroup></Container>)
+      }}>수정하기</button>
+
+      <button className="buttonRed mt-3" style={{width:'85px'}} type="submit"
+      onClick={() => {
+        setShow(true);
+        삭제할것변경({data : 서버리뷰[i]})
+        modalKind변경('삭제')
+        modalTitle변경('호천이가 삭제를 허락했습니다!')
+        modalBody변경('이봐 휴먼, 다음엔 더 잘 써주라구😼')
+      }}>삭제하기</button>
         </div>})}
+
         
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>호천이가 당신의 리뷰를 고마워합니다!</Modal.Title>
+            <Modal.Title>{modalTitle}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>고맙다 휴먼, 너에게 내 총애를 선사하지!😼</Modal.Body>
+          <Modal.Body>{modalBody}</Modal.Body>
           <Modal.Footer>
-            <button className="buttonGray" role="button" onClick={handleClose}>
-              닫기
+            <button className="buttonBlue" role="button" onClick={() => {
+              modalKind === '수정' ? axios.put('/putReview', [수정중id, rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
+              '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) : console.log('새 리뷰 제출완료')
+              handleClose()
+              {window.location.replace("/detail/" + (props.id))}
+              }}>
+              완료하기
             </button>
           </Modal.Footer>
         </Modal>
+        
         </Container>
+
+        
 
     } else if (props.누른탭 === 1) {
       return <Container className="col-md-7"><div className="product-box">

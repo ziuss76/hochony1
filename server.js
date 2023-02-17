@@ -55,7 +55,14 @@ app.get('/search', function(요청, 응답){
   })
 });
 
-app.post('/review', function(요청, 응답){
+app.get('/getReview', function(요청, 응답){
+  db.collection('Review').find().toArray(function(에러, 결과){
+    console.log(결과);
+    응답.json(결과);
+  });
+});
+
+app.post('/postReview', function(요청, 응답){
   db.collection('ReviewCount').findOne({name : '게시물개수'}, function(에러, 결과){
     var 총게시물개수 = 결과.totalPost;
     db.collection('ReviewCount').updateOne( {name : '게시물개수' } , { $inc : { totalPost : 1 } } , function(에러, 결과){
@@ -66,12 +73,18 @@ app.post('/review', function(요청, 응답){
   });
 });
 
-app.get('/getReview', function(요청, 응답){
-  db.collection('Review').find().toArray(function(에러, 결과){
-    console.log(결과);
-    응답.json(결과);
-  });
-});
+app.put('/putReview', function(요청, 응답){
+  db.collection('Review').updateOne( {_id : 요청.body[0]}, { $set : {점수 : 요청.body[1], 내용 : 요청.body[2]}, function(){
+    응답.send('수정완료')
+  }})
+})
+
+app.delete('/deleteReview', function(요청, 응답){
+  db.collection('Review').deleteOne(요청.body, function(에러, 결과){
+    console.log('삭제완료')
+  })
+  응답.send('삭제완료')
+})
 
 app.get('*', function (요청, 응답) {
   응답.sendFile(path.join(__dirname, '/hochony-front/build/index.html'));

@@ -46,11 +46,18 @@ th, td {
       background-color: rgb(207, 82, 24);
       border-radius: 18px;
       padding: 6px 3px;
-      width: 40px;
+      width: 39px;
     }
     .buttonGreen {
       @include 버튼();
       background-color: rgb(57, 158, 99);
+      border-radius: 18px;
+      padding: 6px 3px;
+      width: 39px;
+    }
+    .buttonRed {
+      @include 버튼();
+      background-color: rgb(167, 20, 12);
       border-radius: 18px;
       padding: 6px 3px;
       width: 39px;
@@ -95,6 +102,10 @@ th, td {
     .buttonYellow:after {
       @include 버튼애프터();
       background-color: #fcd705;
+    }
+    .buttonRed::after{
+      @include 버튼애프터();
+      background-color: #ed253d
     }
     button:main,
     button:focus {
