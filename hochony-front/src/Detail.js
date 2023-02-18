@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
 import axios from "axios";
 import { Rating } from 'react-simple-star-rating'
-import CloseButton from 'react-bootstrap/CloseButton';
 
 function Detail(props){
     let dispatch = useDispatch();
@@ -163,8 +162,8 @@ function TabComponent(props) {
       <button className="buttonBlue mb-2" role="button" type="submit"
        onClick={
         () => {
-        axios.post("/postReview", [rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log([rating, 리뷰]))
         setShow(true);
+        modalKind변경('제출')
         modalTitle변경('호천이가 당신의 리뷰를 고마워합니다!')
         modalBody변경('고맙다 휴먼, 너에게 내 총애를 선사하지!😼')
       }}
@@ -214,9 +213,10 @@ function TabComponent(props) {
           <Modal.Footer>
             <button className="buttonBlue" role="button" onClick={() => {
               modalKind === '수정' ? axios.put('/putReview', [수정중id, rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
-              '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) : console.log('새 리뷰 제출완료')
+              modalKind === '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
+              axios.post("/postReview", [rating, 리뷰]).then(()=> window.location.reload()).catch(()=>console.log('실패'))
               handleClose()
-              {window.location.replace("/detail/" + (props.id))}
+              window.location.reload()
               }}>
               완료하기
             </button>
