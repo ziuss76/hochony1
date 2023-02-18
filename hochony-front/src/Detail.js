@@ -140,7 +140,7 @@ function TabComponent(props) {
   }
 
     const [리뷰, 리뷰변경] = useState(''); // 리뷰
-    const [서버리뷰, 서버리뷰변경] = useState([{ _id: 1, '점수': 4, '내용': '호쳐니 기여웡' }]);
+    const [서버리뷰, 서버리뷰변경] = useState([]);
 
     useEffect(() => {
       axios.get("/getReview").then((result) => {
@@ -176,7 +176,7 @@ function TabComponent(props) {
         />
         <Card className="mt-3">
       <Card.Body>
-        <Card.Title>{서버리뷰[i]._id} 번째 리뷰</Card.Title>
+        <Card.Title>{i + 1} 번째 리뷰</Card.Title>
         <Card.Text>
           {서버리뷰[i].내용}
         </Card.Text>
@@ -222,7 +222,6 @@ function TabComponent(props) {
             </button>
           </Modal.Footer>
         </Modal>
-        
         </Container>
 
         
