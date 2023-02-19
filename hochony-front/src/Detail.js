@@ -214,9 +214,9 @@ function TabComponent(props) {
             <button className="buttonBlue" role="button" onClick={() => {
               modalKind === '수정' ? axios.put('/putReview', [수정중id, rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
               modalKind === '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
-              axios.post("/postReview", [rating, 리뷰]).then(()=> window.location.reload()).catch(()=>console.log('실패'))
+              axios.post("/postReview", [rating, 리뷰]).then((결과)=> console.log(결과)).catch(()=>console.log('실패'))
               handleClose()
-              window.location.reload()
+              //window.location.reload()
               }}>
               완료하기
             </button>

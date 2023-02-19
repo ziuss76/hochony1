@@ -28,7 +28,6 @@ th, td {
   transform: translateZ(0);
   transition: filter 0.2s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
@@ -64,7 +63,6 @@ th, td {
   transform: translateZ(0);
   transition: filter 0.2s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
@@ -100,7 +98,6 @@ th, td {
   transform: translateZ(0);
   transition: filter 0.2s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
@@ -109,7 +106,7 @@ th, td {
   background-color: rgb(207, 82, 24);
   border-radius: 18px;
   padding: 6px 3px;
-  width: 40px;
+  width: 39px;
 }
 
 .buttonGreen {
@@ -138,13 +135,49 @@ th, td {
   transform: translateZ(0);
   transition: filter 0.2s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   background-color: rgb(57, 158, 99);
+  border-radius: 18px;
+  padding: 6px 3px;
+  width: 39px;
+}
+
+.buttonRed {
+  -webkit-appearance: button;
+     -moz-appearance: button;
+          appearance: button;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 3px;
+  outline: none;
+  overflow: visible;
+  padding: 10px 13px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background-color: rgb(167, 20, 12);
   border-radius: 18px;
   padding: 6px 3px;
   width: 39px;
@@ -176,7 +209,6 @@ th, td {
   transform: translateZ(0);
   transition: filter 0.2s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
@@ -264,11 +296,25 @@ th, td {
   background-color: #fcd705;
 }
 
+.buttonRed::after {
+  background-clip: padding-box;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  background-color: #ed253d;
+}
+
 button:main,
 button:focus {
   -webkit-user-select: auto;
      -moz-user-select: auto;
-      -ms-user-select: auto;
           user-select: auto;
 }
 
