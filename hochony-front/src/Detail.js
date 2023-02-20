@@ -142,10 +142,13 @@ function TabComponent(props) {
     const [서버리뷰, 서버리뷰변경] = useState([]);
 
     useEffect(() => {
-      axios.get("/getReview").then((result) => {
+      let 불러오기 = axios.get("/getReview").then((result) => {
         서버리뷰변경([...result.data]);
         console.log(서버리뷰);
       })
+      return () => { 
+        clearTimeout(불러오기); //2초 전에 나갔을 때 버그 방지용, 이 전 타이머 꺼서 중첩 방지
+      };
     }, [show]); // 모달창의 show 상태변경 될 때 코드 실행
 
     if (props.누른탭 === 0) {
