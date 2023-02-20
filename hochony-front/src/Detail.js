@@ -146,7 +146,7 @@ function TabComponent(props) {
         서버리뷰변경([...result.data]);
         console.log(서버리뷰);
       })
-    }, []);
+    }, [show]); // 모달창의 show 상태변경 될 때 코드 실행
 
     if (props.누른탭 === 0) {
       return <Container className="col-md-7">
@@ -216,7 +216,7 @@ function TabComponent(props) {
               modalKind === '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
               axios.post("/postReview", [rating, 리뷰]).then((결과)=> console.log(결과)).catch(()=>console.log('실패'))
               handleClose()
-              //window.location.reload()
+              //window.location.reload() 이거 대신에 useEffect 써서 show 변할 때만 get요청
               }}>
               완료하기
             </button>
