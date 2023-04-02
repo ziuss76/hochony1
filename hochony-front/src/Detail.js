@@ -38,7 +38,7 @@ function Detail(props){
               <img
                 src={"https://ziuss76.github.io/images/hochony" + (찾은상품.id + 115) + ".jpg"
                 }
-                className="product" width="94%"
+                className="product-img" width="94%"
               />
             </div>
 

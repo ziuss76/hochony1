@@ -12,8 +12,8 @@ function Cart() {
   let cartStateArray = JSON.parse(cartState) || [];
   
     return (
-      <Container className="col-md-5">
-      <Table responsive>
+      <Container className="col-md-4">
+      <Table>
       <thead>
         <tr>{/* tr: 가로행   td,th: 세로행 */}
           <th>사진</th>
@@ -30,10 +30,12 @@ function Cart() {
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
                   <td>
-                <button className="buttonOrange" role="button" onClick={
+                    <div className="button-box">
+                    <button className="buttonOrange" role="button" onClick={
                 ()=>{dispatch(subCount(a.id))}}>-1</button>
                 <button className="buttonGreen" role="button" onClick={
                 ()=>{dispatch(addCount(a.id))}}>+1</button>
+                    </div>
                 </td>
                 </tr>
                 )
@@ -64,7 +66,7 @@ function 주문하기() {
         <Form.Label>주소</Form.Label>
         <Form.Control placeholder="호천로1번길 83 106동 301호"/>
         <Form.Label className="mt-3">전화번호</Form.Label>
-        <Form.Control placeholder="0101234567"/>
+        <Form.Control placeholder="01012345678"/>
         </Form.Group>
     </Form>
         <Modal.Body>호천이도 주소는 알아야 새벽배송을 가지;;😅

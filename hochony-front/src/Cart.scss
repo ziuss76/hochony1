@@ -1,7 +1,11 @@
 th, td {
     vertical-align : middle;
+    min-width: 3rem;
   }
-  
+.button-box{
+  display: flex;
+  justify-content: center;
+}
   @mixin 버튼() {
       appearance: button;
       border: solid transparent;
