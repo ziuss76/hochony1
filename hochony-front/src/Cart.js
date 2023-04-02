@@ -1,4 +1,4 @@
-import { Table, Modal, Form } from "react-bootstrap";
+import { Table, Modal, Form, Container } from "react-bootstrap";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Cart.scss";
@@ -12,7 +12,7 @@ function Cart() {
   let cartStateArray = JSON.parse(cartState) || [];
   
     return (
-      <>
+      <Container className="col-md-5">
       <Table responsive>
       <thead>
         <tr>{/* tr: 가로행   td,th: 세로행 */}
@@ -29,10 +29,11 @@ function Cart() {
                 <td>{<img src={"https://ziuss76.github.io/images/hochony" + (a.id + 115) + ".jpg"} width="75px"/>}</td>
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
-                  <td><button className="buttonOrange" role="button" onClick={
-                   ()=>{dispatch(addCount(a.id))}}>+1</button>
+                  <td>
+                <button className="buttonOrange" role="button" onClick={
+                ()=>{dispatch(subCount(a.id))}}>-1</button>
                 <button className="buttonGreen" role="button" onClick={
-                      ()=>{dispatch(subCount(a.id))}}>-1</button>
+                ()=>{dispatch(addCount(a.id))}}>+1</button>
                 </td>
                 </tr>
                 )
@@ -40,7 +41,7 @@ function Cart() {
         </tbody>
       </Table>
       <주문하기></주문하기>
-    </>
+      </Container>
     )
 }
 function 주문하기() {
@@ -50,7 +51,7 @@ function 주문하기() {
   
     return (
       <>
-        <button className="buttonBlue" role="button" onClick={handleShow}>
+        <button className="buttonPink" role="button" onClick={handleShow}>
           주문하기
         </button>
   
@@ -72,7 +73,7 @@ function 주문하기() {
             <button className="buttonGray" role="button" onClick={handleClose}>
               닫기
             </button>
-            <button className="buttonBlue" role="button" onClick={handleClose}>
+            <button className="buttonPink" role="button" onClick={handleClose}>
               배송
             </button>
           </Modal.Footer>

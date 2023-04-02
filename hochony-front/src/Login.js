@@ -11,9 +11,11 @@ function Login() {
       <><Container className="col-md-4">
         <img src={"https://ziuss76.github.io/images/hochonylogin.jpg"} className="product mt-3" width="94%"/>
         <div className="product-box">
-            어이, 구글로그인으로 끝난 줄 알았나?<br></br>이것도 빨리 적어라.<br></br>그럼 특별히 막내로 받아주마.
+        <h6>어이, 구글로그인으로 끝난 줄 알았나?</h6>
+        <h6>이것도 빨리 적어라.</h6>
+        <h6>그럼 특별히 막내로 받아주마.</h6>
         </div>
-        <button className="buttonBlue mb-5" role="button" onClick={handleShow}>
+        <button className="buttonPink mb-5" role="button" onClick={handleShow}>
           회원가입  
         </button>
         </Container>
@@ -48,7 +50,7 @@ function Login() {
             <button className="buttonGray" role="button" onClick={handleClose}>
               닫기
             </button>
-            <button className="buttonBlue" role="button" type="submit" onClick={handleClose}>
+            <button className="buttonPink" role="button" type="submit" onClick={handleClose}>
               가입
             </button>
           </Modal.Footer>

@@ -6,15 +6,20 @@
   margin-right: 3px;
   margin-bottom: 1px;
 }
-.navicon {
-  margin-right: 3px;
+.nav-icon {
   font-size: x-large;
   color: salmon;
-
 }
-.navicon:hover {
+.nav-icon:hover {
   transform: translate3d(0, 1.5px, 0);
   color: rgb(253, 100, 83);
+}
+.cart-icon{
+  margin-left: 1rem;
+}
+.login-icon{
+  margin-left: 0.2rem;
+  margin-right: -0.2rem;
 }
 .googleBox {
   display : flex;
@@ -31,7 +36,7 @@
 }
 .buttonSearch {
   background-color: initial;
-  background-image: linear-gradient(-180deg, #00D775, #00BD68);
+  background-image: linear-gradient(-180deg, salmon, rgb(253, 100, 83));
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
   color: #FFFFFF;
@@ -57,7 +62,7 @@
 }
 
 .buttonSearch:hover {
-  background: #00bd68;
+  background: rgb(253, 100, 83);
 }
 
 .photoTitle {
@@ -71,3 +76,4 @@ img {
   /* 캐러셀은 shadow 아래쪽이 좀 이상해져서 작은 상품 이미지는 따로 넣었음 */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+

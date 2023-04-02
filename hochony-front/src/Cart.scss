@@ -31,9 +31,9 @@ th, td {
       white-space: nowrap;
       box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     }
-    .buttonBlue {
+    .buttonPink {
       @include 버튼();
-      background-color: #1899D6;
+      background-color: salmon;
       width: 100px;
     }
     .buttonGray {
@@ -83,9 +83,9 @@ th, td {
       top: 0;
       z-index: -1;
     }
-    .buttonBlue:after {
+    .buttonPink:after {
       @include 버튼애프터();
-      background-color: #1CB0F6;
+      background-color: rgb(248, 110, 95);
     }
     .buttonGray:after {
       @include 버튼애프터();

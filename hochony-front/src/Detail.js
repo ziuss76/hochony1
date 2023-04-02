@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Nav, Container, InputGroup, Form, Modal, Card} from "react-bootstrap";
 import "./Detail.css";
+import "./Cart.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "./store";
 import axios from "axios";
@@ -52,6 +53,16 @@ function Detail(props){
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price} won / {찾은상품.quan} units</p>
     
+              
+              <button
+                className = "buttonOrange"
+                style={{width:'85px'}}
+                onClick={() => {
+                  navigate(-1); //뒤로가기 1은 앞으로가기 2는 앞으로 2번 가기 등등
+                }}
+              >
+                뒤로가기
+              </button>
               <button
                className = "buttonGreen"
                style={{width:'85px'}}
@@ -64,20 +75,11 @@ function Detail(props){
               >
                 장바구니
               </button>
-              <button
-                className = "buttonOrange"
-                style={{width:'85px'}}
-                onClick={() => {
-                  navigate(-1); //뒤로가기 1은 앞으로가기 2는 앞으로 2번 가기 등등
-                }}
-              >
-                뒤로가기
-              </button>
           </div>
           </Container>
 
-        <Container className="col-md-6">
-          <Nav className="mt-2" fill variant="tabs" defaultActiveKey="link-0">
+        <Container className="col-md-4">
+          <Nav className="mt-2" fill variant="tabs" defaultActiveKey="link-0" >
         <Nav.Item>
           <Nav.Link
             eventKey="link-0"
@@ -149,7 +151,7 @@ function TabComponent(props) {
     }, [show]); // 모달창의 show 상태변경 될 때 코드 실행
 
     if (props.누른탭 === 0) {
-      return <Container className="col-md-7">
+      return <Container className="col-md-4">
         <div className="product-box">
         <Rating onClick={handleRating} rating={rating}/>
         <InputGroup className="mt-1"
@@ -159,7 +161,7 @@ function TabComponent(props) {
         <Form.Control className="m-3" as="textarea" rows={6} 
         placeholder="어떤 점이 귀여웠나요? 별점과 함께 10자 이상 작성해주세요!" />
       </InputGroup>
-      <button className="buttonBlue mb-2" role="button" type="submit"
+      <button className="buttonPink mb-2" role="button" type="submit"
        onClick={
         () => {
         setShow(true);
@@ -181,6 +183,15 @@ function TabComponent(props) {
         </Card.Text>
       </Card.Body>
     </Card>
+    <button className="buttonRed mt-3" style={{width:'85px'}} type="submit"
+      onClick={() => {
+        setShow(true);
+        삭제할것변경({data : 서버리뷰[i]})
+        modalKind변경('삭제')
+        modalTitle변경('호천이가 삭제를 허락했습니다!')
+        modalBody변경('이봐 휴먼, 다음엔 더 잘 써주라구😼')
+      }}>삭제하기</button>
+
     <button className="buttonGreen mt-3" style={{width:'85px'}} type="submit"
       onClick={() => {
         setShow(true);
@@ -194,16 +205,7 @@ function TabComponent(props) {
         placeholder="수정할 내용으로 적어주세요!"/></InputGroup></Container>)
       }}>수정하기</button>
 
-      <button className="buttonRed mt-3" style={{width:'85px'}} type="submit"
-      onClick={() => {
-        setShow(true);
-        삭제할것변경({data : 서버리뷰[i]})
-        modalKind변경('삭제')
-        modalTitle변경('호천이가 삭제를 허락했습니다!')
-        modalBody변경('이봐 휴먼, 다음엔 더 잘 써주라구😼')
-      }}>삭제하기</button>
         </div>})}
-
         
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -211,7 +213,7 @@ function TabComponent(props) {
           </Modal.Header>
           <Modal.Body>{modalBody}</Modal.Body>
           <Modal.Footer>
-            <button className="buttonBlue" role="button" onClick={() => {
+            <button className="buttonPink" role="button" onClick={() => {
               modalKind === '수정' ? axios.put('/putReview', [수정중id, rating, 리뷰]).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
               modalKind === '삭제' ? axios.delete('/deleteReview', 삭제할것).then((결과)=>console.log(결과)).catch(()=>console.log('실패')) :
               axios.post("/postReview", [rating, 리뷰]).then((결과)=> console.log(결과)).catch(()=>console.log('실패'))
@@ -224,10 +226,8 @@ function TabComponent(props) {
         </Modal>
         </Container>
 
-        
-
     } else if (props.누른탭 === 1) {
-      return <Container className="col-md-7"><div className="product-box">
+      return <Container className="col-md-4"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
@@ -237,11 +237,14 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-      <h5>주문 내역에서 배송지 수정을 눌러 주세요! (기본배송지 X)</h5><br></br>
-          <p>홈페이지 마이페이지 내의 주문 내역에서 배송지 수정을 눌러주시면 변경 가능합니다.</p>
-          <p>다만, 발주가 시작하지 않은 결제완료 상태의 주문만 홈페이지에서 배송지 수정이 가능합니다.</p>
-          <p>변경이 어려운 경우, 고객센터로 문의주시면 확인 후 안내 도와드리겠습니다.</p>
-        </div>
+      <p>주문 내역에서 배송지 수정을 눌러 주세요.</p>
+      <p>홈페이지 마이페이지 내의 주문 내역에서</p>
+      <p>배송지 수정을 눌러주시면 변경 가능합니다.</p>
+      <p>다만, 발주가 시작하지 않은 결제완료 상태의 주문만</p>
+      <p>홈페이지에서 배송지 수정이 가능합니다.</p>
+      <p>변경이 어려운 경우, 고객센터로 문의주시면</p>
+      <p>확인 후 안내 도와드리겠습니다.</p>
+    </div>
   </div>
 </div>
 <div class="accordion-item">
@@ -252,11 +255,12 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-      <h5>평일 낮 12시 이전까지 주문해주시면 빠르게 받으실 수 있어요!</h5><br></br>
-          <p>평일 낮 12시 이전 주문 해주시면 당일 출고가 시작 됩니다.</p>
-          <p>낮 12시 이후 결제건은 익일 출고가 시작됩니다.</p>
-          <p>주말과 공휴일에 주문한 경우, 영업일이 시작하면 출고가 시작됩니다.</p>
-        </div>
+      <p>평일 낮 12시 이전까지 주문해주시면</p>
+      <p>빠르게 받으실 수 있어요.</p>
+      <p>평일 낮 12시 이전 주문은 당일 출고입니다.</p>
+      <p>낮 12시 이후 결제건은 익일 출고입니다.</p>
+      <p>주말과 공휴일에 주문한 경우, 영업일 출고입니다.</p>
+    </div>
   </div>
 </div>
 <div class="accordion-item">
@@ -267,16 +271,16 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-    <h5>Hochony Shop 제품은 HD(호천이딜리버리)를 통해 배송됩니다.</h5><br></br>
-          <p>배송불가 지역인 경우 분류작업 후 타 택배사로 출고를 요청하고 있습니다만,</p>
-          <p>배송이 다소 지연되는 점 너른 양해 바랍니다.</p>
+    <p>모든 제품은 Hochony Delivery를 통해 배송됩니다.</p>
+    <p>배송불가 지역의 경우, 분류해 타 택배사로 출고를 요청하니</p>
+    <p>배송이 다소 지연되는 점 너른 양해 바랍니다.</p>
     </div>
   </div>
 </div>
 </div>
     </div></Container>
     } else if (props.누른탭 === 2) {
-      return <Container className="col-md-7"><div className="product-box">
+      return <Container className="col-md-4"><div className="product-box">
       <div class="accordion accordion-flush" id="accordionFlushExample">
 <div class="accordion-item">
   <h2 class="accordion-header" id="flush-headingOne">
@@ -286,11 +290,12 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-      <h5>호천님의 귀여움은 한번 간택당하면 빠꾸 없는 게 국룰입니다만,</h5><br></br>
-          <p>호천님의 넓은 아량으로, 단순 변심에 의한 환불은 제품 수령 후 14일 이내까지 가능합니다.</p>
-          <p>단, 단순 변심으로 인한 반품 및 교환시 왕복 배송비 5,000원이 발생됩니다.</p>
-          <p>제품이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.</p>
-        </div>
+      <p>호천님의 귀여움은 한번 간택당하면</p>
+      <p>그 이전의 삶으로 영영 돌아갈 수 없습니다만</p>
+      <p>호천님의 넓은 아량으로, 단순 변심에 의한 환불은</p>
+      <p>제품 수령 후 14일 이내까지 가능합니다.</p>
+      <p>그러나 이 때, 왕복 배송비 5,000원이 발생됩니다.</p>
+    </div>
   </div>
 </div>
 <div class="accordion-item">
@@ -301,11 +306,11 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-      <h5>홈페이지에서 접수하거나, 고객센터로 연락주세요.</h5><br></br>
-          <p>교환/반품 접수 후 취소를 원하실 경우, 마이페이지 주문내역에서 신청해주세요.</p>
-          <p>홈페이지 신청이 어려우신 경우, 고객센터로 연락 주시면 확인 후 취소 도와드리겠습니다.</p>
-          
-        </div>
+      <p>교환/반품 접수 후 취소를 원하실 경우</p>
+      <p>마이페이지 주문내역에서 신청해주세요.</p>
+      <p>홈페이지 신청이 어려우신 경우</p>
+      <p>고객센터로 연락 주시면 확인 후 취소 도와드리겠습니다.</p>
+    </div>
   </div>
 </div>
 <div class="accordion-item">
@@ -316,9 +321,10 @@ function TabComponent(props) {
   </h2>
   <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
     <div class="accordion-body">
-    <h5>반품 완료 후 영업일 기준 5일 내로 환불이 완료됩니다.</h5><br></br>
-          <p>반품 접수 완료 이후, 통상적으로 영업일 기준 1~3일 정도 소요됩니다.</p>
-          <p>다만, 카드사 및 결제사의 사정에 따라 1~2일 정도 추가로 소요될 수 있습니다.</p>
+    <p>반품 완료 후 영업일 기준 5일 내로 환불이 완료됩니다.</p>
+    <p>반품 접수 완료 이후, 영업일 기준 1~3일 정도 소요됩니다.</p>
+    <p>다만, 카드사 및 결제사의 사정에 따라</p>
+    <p>1~2일 정도 더 소요될 수 있습니다.</p>
     </div>
   </div>
 </div>

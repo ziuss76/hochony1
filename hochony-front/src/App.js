@@ -37,6 +37,7 @@ function App() {
         </Nav.Link>
         <Container className='col-md-4'>
         <InputGroup
+        className='ms-4'
         onChange={(e)=>{
           e.preventDefault();
           검색변경(e.target.value);
@@ -70,8 +71,8 @@ function App() {
     {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
     <Nav>
       <div className="icon" >
-      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} className="navicon"/></Nav.Link>
-      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} className="navicon"/></Nav.Link>
+      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} className="nav-icon cart-icon"/></Nav.Link>
+      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} className="nav-icon login-icon"/></Nav.Link>
       </div>
     </Nav>
       
@@ -135,7 +136,7 @@ function Main(props) {
     return <Card hochony={props.hochony[i]} i={i} key={i}/>; //hochony 중에 hochony[i] 만 전송한다
   })}
 </div>
-{props.구글로그인 === true? <div className='googleText'><Badge pill bg="warning" text="dark">
+{props.구글로그인 === true? <div className='googleText'><Badge pill bg="light" text="dark">
 구글 로그인 하고 더보기! </Badge></div> : null}
 {props.구글로그인 === true? <div className='googleBox'>
   <GoogleOAuthProvider clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}>
