@@ -13,6 +13,7 @@ import "./Cart.scss";
 import axios from "axios";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
+import ScrollTop from './ScrollTop';
 
 
 
@@ -79,6 +80,7 @@ function App() {
     </Container>
   </Navbar>
   {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
+  <ScrollTop/>
   <Routes>
         <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경}/>}/>
         <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
