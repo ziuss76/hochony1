@@ -1,24 +1,24 @@
 export default [
     { _id: 0,
       id: 0,
-      title: "This is my seat",
-      content: "Go get my snack then I will move",
+      title: "요리보고",
+      content: "조리봐도 이상하게 생겼네",
       price: 120,
       quan: 100
     },
   
     { _id: 1,
       id: 1,
-      title: "Eat my feet human",
-      content: "It is not high five",
+      title: "저 머리끈은",
+      content: "내꺼야 이제",
       price: 110,
       quan: 100
     },
   
     { _id: 2,
       id: 2,
-      title: "Too bright here",
-      content: "But still I can hear you",
+      title: "왜 불렀어?",
+      content: "나 아무것도 안했는데?",
       price: 130,
       quan: 100
     },

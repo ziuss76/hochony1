@@ -188,7 +188,7 @@ function Card(props) {
         onClick={() => {
           navigate("/detail/" + props.hochony.id);
         }}
-        src={"https://ziuss76.github.io/images/hochony" + (props.hochony.id + 115) + ".jpg"
+        src={"https://ziuss76.github.io/images/hopic" + (props.hochony.id) + ".jpg"
         
         }
         alt="" width="90%"
