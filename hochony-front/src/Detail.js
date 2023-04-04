@@ -36,7 +36,7 @@ function Detail(props){
       <><Container className="col-md-4">
             <div className="mx-auto">
               <img
-                src={"https://ziuss76.github.io/images/hocho" + (찾은상품.id) + ".jpg"
+                src={"https://ziuss76.github.io/images/hopic" + (찾은상품.id) + ".jpg"
                 }
                 className="product-img" width="94%"
               />
