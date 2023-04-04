@@ -21,7 +21,6 @@ MongoClient.connect(process.env.MONGODB_URI, {useUnifiedTopology: true }, functi
     }); 
      db = client.db('ShopData'); //ShopData 이라는 db에 연결
      console.log('listening on db')
-
 });
 
 app.use(express.static(path.join(__dirname, '/hochony-front/build')));
@@ -90,4 +89,5 @@ app.get('*', function (요청, 응답) {
   응답.sendFile(path.join(__dirname, '/hochony-front/build/index.html'));
 });
 
-// nodemon server.js
+// npm start
+// = nodemon server.js 로 설정함
