@@ -17,7 +17,7 @@ MongoClient.connect(process.env.MONGODB_URI, {useUnifiedTopology: true }, functi
      //연결되면 할일
     if(에러) return console.log(에러) //에러 나오면 콘솔에 띄우기
     app.listen(PORT, function () {
-      console.log('listening on 8080')
+      console.log('listening on localhost')
     }); 
      db = client.db('ShopData'); //ShopData 이라는 db에 연결
      console.log('listening on db')

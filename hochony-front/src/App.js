@@ -52,7 +52,7 @@ function App() {
           axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
             .get('/search?value=' + 검색) //get 요청 할 주소
             .then((result) => {
-              console.log(result.data);
+              //console.log(result.data);
               //then 은 요청 성공시 실행할 코드, result.data 는 받아온 데이터
               hochony변경([...result.data]);
               더보기변경(false);
