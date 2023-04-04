@@ -30,7 +30,7 @@ function App() {
       <Nav.Link as={Link} to="/">
         <img
           alt=""
-          src="https://ziuss76.github.io/hochoicon.svg"
+          src="https://ziuss76.github.io/hochoicon.jpeg"
           width="35px"
           height="35px"
           className="hochoicon"
