@@ -15,8 +15,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import ScrollTop from './ScrollTop';
 
-
-
 function App() { 
   let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
   let [검색, 검색변경] = useState('');
@@ -81,7 +79,7 @@ function App() {
   </Navbar>
   {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
   <ScrollTop/>
-  <Routes>
+      <Routes>
         <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경}/>}/>
         <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
         <Route path="/cart" element={<Cart/>}/>
@@ -152,8 +150,7 @@ function Main(props) {
           }}
           onError={() => {
             console.log('Login Failed');
-          }}
-        />
+          }}/>
 </GoogleOAuthProvider></div> : null}
 
 { props.더보기 === true ?
@@ -171,10 +168,7 @@ onClick={() => {
     .catch(() => {
       console.log("불러오기 실패!");
     });
-}}
->
-더보기
-</button> : null}
+}}>더보기</button> : null}
 </div>
 </>
   )
