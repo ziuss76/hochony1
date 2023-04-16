@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, Form, Carousel, InputGroup, Badge} from "react-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Data from "./data.js"; // Data 자리엔 자유롭게 작명가능
 import Detail from "./Detail.js";
 import Cart from "./Cart.js";
@@ -24,6 +24,19 @@ function App() {
   let [검색, 검색변경] = useState('');
   let [더보기, 더보기변경] = useState(false);
   let [구글로그인, 구글로그인변경] = useState(true);
+  const [로그인완료, 로그인완료변경] = useState(false);
+
+  useEffect(() => {
+    // 앱 로드시 로컬 스토리지에서 accessToken을 가져와서 로그인 상태를 확인합니다.
+    const accessToken = sessionStorage.getItem('accessToken')
+    if (!accessToken) {
+      sessionStorage.removeItem('accessToken')
+    } else {
+      로그인완료변경(true)
+      구글로그인변경(false)
+      더보기변경(true)
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -84,7 +97,7 @@ function App() {
   {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
   <ScrollTop/>
       <Routes>
-        <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경}/>}/>
+        <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경} 로그인완료={로그인완료} 로그인완료변경={로그인완료변경}/>}/>
         <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/login" element={<Login/>}/>
@@ -147,8 +160,10 @@ function Main(props) {
 <GoogleLogin
           text='signin_with'
           shape='pill'
-          onSuccess={(credentialResponse) => {
-            // console.log(credentialResponse);
+          onSuccess={(res) => {
+            const accessToken = res.credential;
+            sessionStorage.setItem('accessToken', accessToken)
+            props.로그인완료변경(true)
             props.구글로그인변경(false)
             props.더보기변경(true)
           }}
@@ -166,7 +181,7 @@ onClick={() => {
     .get('/content')
     .then((result) => {
       console.log(result.data);
-      props.hochony변경([...props.hochony, ...result.data.sort((a,b)=> a.id - b.id)]);
+      props.hochony변경([...result.data.sort((a,b)=> a.id - b.id)]);
       props.더보기변경(false);
     })
     .catch(() => {
