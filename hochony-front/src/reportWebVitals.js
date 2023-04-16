@@ -10,4 +10,4 @@ const reportWebVitals = onPerfEntry => {
   }
 };
 
-export default reportWebVitals;
+export default reportWebVitals; // 웹 퍼포먼스 측정 도구라고 함

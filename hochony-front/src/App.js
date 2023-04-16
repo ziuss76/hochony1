@@ -15,6 +15,10 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import ScrollTop from './ScrollTop';
 
+// import Data2 from "./data2.json"; 
+// 주소창에 detail/3 부터 안뜨는 이유는 주소창에 치면 새로고침 됨
+// 그래서 hochony가 3개밖에 없는 상태로 돌아감
+
 function App() { 
   let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
   let [검색, 검색변경] = useState('');
@@ -28,7 +32,7 @@ function App() {
       <Nav.Link as={Link} to="/">
         <img
           alt=""
-          src="https://ziuss76.github.io/hochoicon.jpeg"
+          src="https://storage.googleapis.com/hochony/hochoicon.jpeg"
           width="35px"
           height="35px"
           className="hochoicon"
@@ -97,7 +101,7 @@ function Main(props) {
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
-                src="https://ziuss76.github.io/images/hochonybg1.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg1.jpg"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -108,7 +112,7 @@ function Main(props) {
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
-                src="https://ziuss76.github.io/images/hochonybg2.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg2.jpg"
                 alt="Second slide"
               />
               <Carousel.Caption>
@@ -119,7 +123,7 @@ function Main(props) {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="https://ziuss76.github.io/images/hochonybg3.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg3.jpg"
                 alt="Third slide"
               />
               <Carousel.Caption>
@@ -182,7 +186,7 @@ function Card(props) {
         onClick={() => {
           navigate("/detail/" + props.hochony.id);
         }}
-        src={"https://ziuss76.github.io/images/hopic" + (props.hochony.id) + ".jpg"
+        src={"https://storage.googleapis.com/hochony/hopic" + (props.hochony.id) + ".jpg"
         
         }
         alt="" width="90%"

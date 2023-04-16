@@ -26,7 +26,7 @@ function Cart() {
         {
         cartStateArray[0] === null ? null : cartStateArray.map((a,i)=>
                 <tr key={i}>
-                <td>{<img src={"https://ziuss76.github.io/images/hopic" + (a.id) + ".jpg"} width="75px"/>}</td>
+                <td>{<img src={"https://storage.googleapis.com/hochony/hopic" + (a.id) + ".jpg"} width="75px"/>}</td>
                   <td>{ a.name }</td>
                   <td>{ a.quan }</td>
                   <td>
