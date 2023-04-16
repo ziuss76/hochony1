@@ -9,7 +9,7 @@ function Login() {
   
     return (
       <><Container className="col-md-4">
-        <img src={"https://storage.googleapis.com/hochony/hochonylogin.jpg"} className="product mt-3" width="94%"/>
+        <img src={"https://storage.googleapis.com/hochony/hochonylogin.webp"} className="product mt-3" width="94%"/>
         <div className="product-box">
         <h6>어이, 구글로그인으로 끝난 줄 알았나?</h6>
         <h6>이것도 빨리 적어라.</h6>

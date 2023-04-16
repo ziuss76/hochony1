@@ -36,7 +36,7 @@ function Detail(props){
       <><Container className="col-md-4">
             <div className="mx-auto">
               <img
-                src={"https://storage.googleapis.com/hochony/hopic" + (찾은상품.id) + ".jpg"
+                src={"https://storage.googleapis.com/hochony/hocho" + (찾은상품.id) + ".webp"
                 }
                 className="product-img" width="94%"
               />

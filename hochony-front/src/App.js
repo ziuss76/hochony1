@@ -101,7 +101,7 @@ function Main(props) {
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg1.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg1.webp"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -112,7 +112,7 @@ function Main(props) {
             <Carousel.Item interval={1500}>
               <img
                 className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg2.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg2.webp"
                 alt="Second slide"
               />
               <Carousel.Caption>
@@ -123,7 +123,7 @@ function Main(props) {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg3.jpg"
+                src="https://storage.googleapis.com/hochony/hochonybg3.webp"
                 alt="Third slide"
               />
               <Carousel.Caption>
@@ -186,7 +186,7 @@ function Card(props) {
         onClick={() => {
           navigate("/detail/" + props.hochony.id);
         }}
-        src={"https://storage.googleapis.com/hochony/hopic" + (props.hochony.id) + ".jpg"
+        src={"https://storage.googleapis.com/hochony/hocho" + (props.hochony.id) + ".webp"
         
         }
         alt="" width="90%"
