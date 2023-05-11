@@ -1,221 +1,117 @@
-import './App.css';
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Container, Nav, Form, Carousel, InputGroup, Badge} from "react-bootstrap";
+import { Navbar, Container, Nav, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { faCartPlus, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Link, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Data from "./data.js"; // Data 자리엔 자유롭게 작명가능
 import Detail from "./Detail.js";
 import Cart from "./Cart.js";
+import Main from "./Main.js";
 import Login from "./Login.js";
-import "./Cart.scss";
+import "./Button.scss";
 import axios from "axios";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
-import ScrollTop from './ScrollTop';
+import ScrollTop from "./ScrollTop";
 
-// import Data2 from "./data2.json"; 
+// import Data2 from "./data2.json";
 // 주소창에 detail/3 부터 안뜨는 이유는 주소창에 치면 새로고침 됨
 // 그래서 hochony가 3개밖에 없는 상태로 돌아감
 
-function App() { 
-  let [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
-  let [검색, 검색변경] = useState('');
-  let [더보기, 더보기변경] = useState(false);
-  let [구글로그인, 구글로그인변경] = useState(true);
+function App() {
+  const [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
+  const [검색, 검색변경] = useState("");
+  const [더보기, 더보기변경] = useState(false);
+  const [구글로그인, 구글로그인변경] = useState(true);
   const [로그인완료, 로그인완료변경] = useState(false);
 
   useEffect(() => {
-    // 앱 로드시 로컬 스토리지에서 accessToken을 가져와서 로그인 상태를 확인합니다.
-    const accessToken = sessionStorage.getItem('accessToken')
+    const accessToken = sessionStorage.getItem("accessToken");
     if (!accessToken) {
-      sessionStorage.removeItem('accessToken')
+      sessionStorage.removeItem("accessToken");
     } else {
-      로그인완료변경(true)
-      구글로그인변경(false)
-      더보기변경(true)
+      로그인완료변경(true);
+      구글로그인변경(false);
+      더보기변경(true);
     }
   }, []);
 
   return (
     <div className="App">
       <Navbar sticky="top" bg="light" variant="light">
-      <Container fluid> 
-      <Nav.Link as={Link} to="/">
-        <img
-          alt=""
-          src="https://storage.googleapis.com/hochony/hochoicon.jpeg"
-          width="35px"
-          height="35px"
-          className="hochoicon"
-        />
-        </Nav.Link>
-        <Container className='col-md-4'>
-        <InputGroup
-        className='ms-4'
-        onChange={(e)=>{
-          e.preventDefault();
-          검색변경(e.target.value);
-          console.log(e.target.value)}}>
-        <Form.Control
-          placeholder="Hochony Shop"
-        />
-        <button type="search"
-          className="me-1 buttonSearch"
-          size="sm"
-          style={{ width: '3rem' } }
-          onClick={() => {
-          axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
-            .get('/search?value=' + 검색) //get 요청 할 주소
-            .then((result) => {
-              //console.log(result.data);
-              //then 은 요청 성공시 실행할 코드, result.data 는 받아온 데이터
-              hochony변경([...result.data]);
-              더보기변경(false);
-            })
-            .catch(() => {
-              //catch 는 요청 실패시 실행할 코드
-              console.log("불러오기 실패!");
-            });
-        }}
-        >
-        <FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/></button>
-      </InputGroup>
-      </Container>
-      
-    {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
-    <Nav>
-      <div className="icon" >
-      <Nav.Link as={Link} to="/cart"><FontAwesomeIcon icon={faCartPlus} className="nav-icon cart-icon"/></Nav.Link>
-      <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} className="nav-icon login-icon"/></Nav.Link>
-      </div>
-    </Nav>
-      
-    </Container>
-  </Navbar>
-  {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
-  <ScrollTop/>
-      <Routes>
-        <Route path="/" element={<Main hochony={hochony} hochony변경={hochony변경} 더보기={더보기} 더보기변경={더보기변경} 구글로그인={구글로그인} 구글로그인변경={구글로그인변경} 로그인완료={로그인완료} 로그인완료변경={로그인완료변경}/>}/>
-        <Route path="/detail/:id" element={<Detail hochony={hochony}/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/login" element={<Login/>}/>
-      </Routes>
-    </div>
-  );
-}
-function Main(props) {
-  
-  return (
-    <>
-    <Container className="col-md-10"> 
-          <Carousel className="my-5 mx-3 Carousel">
-            <Carousel.Item interval={1500}>
-              <img
-                className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg1.webp"
-                alt="First slide"
-              />
-              <Carousel.Caption>
-                <h4>자, 이제 당신도 호집사</h4>
-                <h6>젤리맛좀 볼테야?</h6>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item interval={1500}>
-              <img
-                className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg2.webp"
-                alt="Second slide"
-              />
-              <Carousel.Caption>
-              <h4>이 천사같은 모습</h4>
-                <h6>그냥 지나칠 수 없지</h6>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item interval={3000}>
-              <img
-                className="d-block w-100"
-                src="https://storage.googleapis.com/hochony/hochonybg3.webp"
-                alt="Third slide"
-              />
-              <Carousel.Caption>
-              <h4>호천이님의</h4>
-                <h6>앙큼한 귀여움을 팔아요</h6>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
+        <Container fluid>
+          <Nav.Link as={Link} to="/">
+            <img alt="" src="https://storage.googleapis.com/hochony/hochoicon.jpeg" width="35px" height="35px" className="hochoicon" />
+          </Nav.Link>
+          <Container className="col-md-4">
+            <InputGroup
+              className="ms-4"
+              onChange={(e) => {
+                e.preventDefault();
+                검색변경(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              <Form.Control placeholder="Hochony Shop" />
+              <button
+                type="search"
+                className="me-1 buttonSearch"
+                size="sm"
+                style={{ width: "3rem" }}
+                onClick={() => {
+                  axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
+                    .get("/search?value=" + 검색)
+                    .then((result) => {
+                      //console.log(result.data) result.data 는 받아온 데이터
+                      hochony변경([...result.data]);
+                      더보기변경(false);
+                    })
+                    .catch(() => {
+                      console.log("불러오기 실패!");
+                    });
+                }}
+              >
+                <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+              </button>
+            </InputGroup>
           </Container>
 
-<div className="container">
-<div className="row">
-  {props.hochony.map((a, i) => {
-    return <Card hochony={props.hochony[i]} i={i} key={i}/>; //hochony 중에 hochony[i] 만 전송한다
-  })}
-</div>
-{props.구글로그인 === true? <div className='googleText'><Badge pill bg="light" text="dark">
-구글 로그인 하고 더보기! </Badge></div> : null}
-{props.구글로그인 === true? <div className='googleBox'>
-  <GoogleOAuthProvider clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-<GoogleLogin
-          text='signin_with'
-          shape='pill'
-          onSuccess={(res) => {
-            const accessToken = res.credential;
-            sessionStorage.setItem('accessToken', accessToken)
-            props.로그인완료변경(true)
-            props.구글로그인변경(false)
-            props.더보기변경(true)
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}/>
-</GoogleOAuthProvider></div> : null}
+          {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
+          <Nav>
+            <div className="icon">
+              <Nav.Link as={Link} to="/cart">
+                <FontAwesomeIcon icon={faCartPlus} className="nav-icon cart-icon" />
+              </Nav.Link>
+              <Nav.Link as={Link} to="/login">
+                <FontAwesomeIcon icon={faUser} className="nav-icon login-icon" />
+              </Nav.Link>
+            </div>
+          </Nav>
+        </Container>
+      </Navbar>
+      {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
+      <ScrollTop />
 
-{ props.더보기 === true ?
-<button
-className="buttonYellow"
-style={{width: 85}}
-onClick={() => {
-  axios
-    .get('/content')
-    .then((result) => {
-      console.log(result.data);
-      props.hochony변경([...result.data.sort((a,b)=> a.id - b.id)]);
-      props.더보기변경(false);
-    })
-    .catch(() => {
-      console.log("불러오기 실패!");
-    });
-}}>더보기</button> : null}
-</div>
-</>
-  )
-}
-
-function Card(props) {
-  let navigate = useNavigate();
-  return (
-    <div className="col-md-4">
-      <img className='product-img'
-        onClick={() => {
-          navigate("/detail/" + props.hochony.id);
-        }}
-        src={"https://storage.googleapis.com/hochony/hocho" + (props.hochony.id) + ".webp"
-        
-        }
-        alt="" width="90%"
-      />
-      <div className="product-box"
-      onClick={() => {
-        navigate("/detail/" + props.hochony.id);
-      }}>
-      <h4 className="photoTitle">{props.hochony.title}</h4>
-      <p>
-        {props.hochony.content}
-      </p>
-      <p>{props.hochony.price} won / {props.hochony.quan} units</p>
-    </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main
+              hochony={hochony}
+              hochony변경={hochony변경}
+              더보기={더보기}
+              더보기변경={더보기변경}
+              구글로그인={구글로그인}
+              구글로그인변경={구글로그인변경}
+              로그인완료={로그인완료}
+              로그인완료변경={로그인완료변경}
+            />
+          }
+        />
+        <Route path="/detail/:id" element={<Detail hochony={hochony} />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }
