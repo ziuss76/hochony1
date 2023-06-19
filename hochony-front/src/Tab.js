@@ -5,7 +5,7 @@ import "./Button.scss";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
 
-function Tab(props) {
+function Tab({ 누른탭, 스위치변경 }) {
   const [show, setShow] = useState(false); // 탭
   const [modalKind, modalKind변경] = useState("");
   const [modalTitle, modalTitle변경] = useState("");
@@ -15,7 +15,7 @@ function Tab(props) {
 
   const handleClose = () => setShow(false);
   useEffect(() => {
-    props.스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
+    스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
   });
 
   const [rating, setRating] = useState(0); // 별점
@@ -33,7 +33,7 @@ function Tab(props) {
     });
   }, [show]); // 모달창의 show 상태변경 될 때 코드 실행
 
-  if (props.누른탭 === 0) {
+  if (누른탭 === 0) {
     return (
       <Container className="col-md-4">
         <div className="product-box">
@@ -152,7 +152,7 @@ function Tab(props) {
         </Modal>
       </Container>
     );
-  } else if (props.누른탭 === 1) {
+  } else if (누른탭 === 1) {
     return (
       <Container className="col-md-4">
         <div className="product-box">
@@ -209,7 +209,7 @@ function Tab(props) {
         </div>
       </Container>
     );
-  } else if (props.누른탭 === 2) {
+  } else if (누른탭 === 2) {
     return (
       <Container className="col-md-4">
         <div className="product-box">

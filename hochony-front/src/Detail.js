@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "./store";
 import Tab from "./Tab";
 
-function Detail(props) {
+function Detail({ hochony }) {
   const dispatch = useDispatch();
   const [alert, alert변경] = useState(true);
   const [누른탭, 누른탭변경] = useState(0);
@@ -28,7 +28,7 @@ function Detail(props) {
 
   const navigate = useNavigate();
   const { id } = useParams(); // {id}는 :id 자리에 있던 숫자
-  const 찾은상품 = props.hochony.find((상품) => 상품.id === parseInt(id)); // 상품.id 가 :id 자리의 숫자와 같은 상품을 찾아줌
+  const 찾은상품 = hochony.find((상품) => 상품.id === parseInt(id)); // 상품.id 가 :id 자리의 숫자와 같은 상품을 찾아줌
 
   return (
     <>

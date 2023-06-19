@@ -8,7 +8,7 @@ import axios from "axios";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 
-function Main(props) {
+function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 로그인완료변경, 더보기, 더보기변경 }) {
   return (
     <>
       <Container className="col-md-10">
@@ -39,18 +39,18 @@ function Main(props) {
 
       <div className="container">
         <div className="row">
-          {props.hochony.map((a, i) => {
-            return <Card hochony={props.hochony[i]} i={i} key={i} />; //hochony 중에 hochony[i] 만 전송한다
+          {hochony.map((a, i) => {
+            return <Card hochony={hochony[i]} i={i} key={i} />; //hochony 중에 hochony[i] 만 전송한다
           })}
         </div>
-        {props.구글로그인 === true ? (
+        {구글로그인 === true ? (
           <div className="googleText">
             <Badge pill bg="light" text="dark">
               구글 로그인 하고 더보기!{" "}
             </Badge>
           </div>
         ) : null}
-        {props.구글로그인 === true ? (
+        {구글로그인 === true ? (
           <div className="googleBox">
             <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
               <GoogleLogin
@@ -59,9 +59,9 @@ function Main(props) {
                 onSuccess={(res) => {
                   const accessToken = res.credential;
                   sessionStorage.setItem("accessToken", accessToken);
-                  props.로그인완료변경(true);
-                  props.구글로그인변경(false);
-                  props.더보기변경(true);
+                  로그인완료변경(true);
+                  구글로그인변경(false);
+                  더보기변경(true);
                 }}
                 onError={() => {
                   console.log("Login Failed");
@@ -71,7 +71,7 @@ function Main(props) {
           </div>
         ) : null}
 
-        {props.더보기 === true ? (
+        {더보기 === true ? (
           <button
             className="buttonYellow"
             style={{ width: 85 }}
@@ -80,8 +80,8 @@ function Main(props) {
                 .get("/content")
                 .then((result) => {
                   console.log(result.data);
-                  props.hochony변경([...result.data.sort((a, b) => a.id - b.id)]);
-                  props.더보기변경(false);
+                  hochony변경([...result.data.sort((a, b) => a.id - b.id)]);
+                  더보기변경(false);
                 })
                 .catch(() => {
                   console.log("불러오기 실패!");

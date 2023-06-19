@@ -4,29 +4,31 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./Button.scss";
 
-function Card(props) {
+function Card({ hochony }) {
   let navigate = useNavigate();
+  const { id, title, content, price, quan } = hochony;
+
   return (
     <div className="col-md-4">
       <img
         className="product-img"
         onClick={() => {
-          navigate("/detail/" + props.hochony.id);
+          navigate("/detail/" + id);
         }}
-        src={"https://storage.googleapis.com/hochony/hocho" + props.hochony.id + ".webp"}
+        src={"https://storage.googleapis.com/hochony/hocho" + id + ".webp"}
         alt=""
         width="90%"
       />
       <div
         className="product-box"
         onClick={() => {
-          navigate("/detail/" + props.hochony.id);
+          navigate("/detail/" + id);
         }}
       >
-        <h4 className="photoTitle">{props.hochony.title}</h4>
-        <p>{props.hochony.content}</p>
+        <h4 className="photoTitle">{title}</h4>
+        <p>{content}</p>
         <p>
-          {props.hochony.price} won / {props.hochony.quan} units
+          {price} won / {quan} units
         </p>
       </div>
     </div>
