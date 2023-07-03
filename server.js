@@ -72,20 +72,26 @@ app.get("/search", (req, res) => {
     });
 });
 
-app.get("/getReview", (req, res) => {
+app.get("/getReview/:id", (req, res) => {
+  const id = req.params.id;
   db.collection("Review")
-    .find()
+    .find({ id: parseInt(id) })
     .toArray((err, result) => {
       // console.log(result);
       res.json(result);
     });
 });
 
-app.post("/postReview", (req, res) => {
+app.post("/postReview/:id", (req, res) => {
+  const id = req.params.id;
+  const rating = req.body[0];
+  const review = req.body[1];
+
   db.collection("ReviewCount").findOne({ name: "게시물개수" }, (err, result) => {
     const 총게시물개수 = result.totalPost;
+
     db.collection("ReviewCount").updateOne({ name: "게시물개수" }, { $inc: { totalPost: 1 } }, (err, result) => {
-      db.collection("Review").insertOne({ _id: 총게시물개수 + 1, 점수: req.body[0], 내용: req.body[1] }, () => {
+      db.collection("Review").insertOne({ _id: 총게시물개수 + 1, id: parseInt(id), 점수: rating, 내용: review }, () => {
         res.send("전송완료");
       });
     });

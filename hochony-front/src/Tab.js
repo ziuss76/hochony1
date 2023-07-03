@@ -5,39 +5,39 @@ import "./Button.scss";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
 
-function Tab({ 누른탭, 스위치변경 }) {
-  const [show, setShow] = useState(false); // 탭
+function Tab({ 누른탭, 스위치변경, id }) {
+  const [show, setShow] = useState(false);
   const [modalKind, modalKind변경] = useState("");
   const [modalTitle, modalTitle변경] = useState("");
   const [modalBody, modalBody변경] = useState("");
   const [수정중id, 수정중id변경] = useState(0);
   const [삭제할것, 삭제할것변경] = useState({});
+  const [리뷰, 리뷰변경] = useState("");
+  const [서버리뷰, 서버리뷰변경] = useState([]);
+  const [별점, 별점변경] = useState(0);
 
   const handleClose = () => setShow(false);
+
   useEffect(() => {
     스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
   });
 
-  const [rating, setRating] = useState(0); // 별점
   const handleRating = (rate) => {
-    setRating(rate);
+    별점변경(rate);
   };
 
-  const [리뷰, 리뷰변경] = useState(""); // 리뷰
-  const [서버리뷰, 서버리뷰변경] = useState([]);
-
   useEffect(() => {
-    axios.get("/getReview").then((result) => {
+    axios.get(`/getReview/${id}`).then((result) => {
       서버리뷰변경([...result.data]);
-      console.log(서버리뷰);
+      console.log([...result.data]);
     });
-  }, [show]); // 모달창의 show 상태변경 될 때 코드 실행
+  }, [show, id, 서버리뷰]); // 모달창의 show 상태변경 될 때 코드 실행
 
   if (누른탭 === 0) {
     return (
       <Container className="col-md-4">
         <div className="product-box">
-          <Rating onClick={handleRating} rating={rating} />
+          <Rating onClick={handleRating} rating={별점} />
           <InputGroup
             className="mt-1"
             onChange={(e) => {
@@ -98,7 +98,7 @@ function Tab({ 누른탭, 스위치변경 }) {
                   modalTitle변경("호천이가 수정을 허락했습니다!");
                   modalBody변경(
                     <Container>
-                      <Rating onClick={handleRating} rating={rating} />
+                      <Rating onClick={handleRating} rating={별점} />
                       <InputGroup
                         className="mt-1"
                         onChange={(e) => {
@@ -130,7 +130,7 @@ function Tab({ 누른탭, 스위치변경 }) {
               onClick={() => {
                 modalKind === "수정"
                   ? axios
-                      .put("/putReview", [수정중id, rating, 리뷰])
+                      .put("/putReview", [수정중id, 별점, 리뷰])
                       .then((결과) => console.log(결과))
                       .catch(() => console.log("실패"))
                   : modalKind === "삭제"
@@ -139,7 +139,7 @@ function Tab({ 누른탭, 스위치변경 }) {
                       .then((결과) => console.log(결과))
                       .catch(() => console.log("실패"))
                   : axios
-                      .post("/postReview", [rating, 리뷰])
+                      .post(`/postReview/${id}`, [별점, 리뷰])
                       .then((결과) => console.log(결과))
                       .catch(() => console.log("실패"));
                 handleClose();
