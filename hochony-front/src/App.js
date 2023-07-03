@@ -28,7 +28,9 @@ function App() {
   useEffect(() => {
     const accessToken = sessionStorage.getItem("accessToken");
     if (!accessToken) {
-      sessionStorage.removeItem("accessToken");
+      로그인완료변경(false);
+      구글로그인변경(true);
+      더보기변경(false);
     } else {
       로그인완료변경(true);
       구글로그인변경(false);

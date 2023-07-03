@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Carousel, Badge } from "react-bootstrap";
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card.js";
 import "./Button.scss";
 import axios from "axios";
@@ -9,6 +9,21 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 
 function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 로그인완료변경, 더보기, 더보기변경 }) {
+  useEffect(() => {
+    if (더보기) {
+      axios
+        .get("/content")
+        .then((result) => {
+          // console.log(result.data);
+          hochony변경([...result.data.sort((a, b) => a.id - b.id)]);
+          더보기변경(false);
+        })
+        .catch(() => {
+          console.log("불러오기 실패!");
+        });
+    }
+  }, [더보기]);
+
   return (
     <>
       <Container className="col-md-10">
@@ -46,7 +61,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
         {구글로그인 === true ? (
           <div className="googleText">
             <Badge pill bg="light" text="dark">
-              구글 로그인 하고 더보기!{" "}
+              구글 로그인 하고 더보기!
             </Badge>
           </div>
         ) : null}
@@ -71,7 +86,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
           </div>
         ) : null}
 
-        {더보기 === true ? (
+        {/* {더보기 === true ? (
           <button
             className="buttonYellow"
             style={{ width: 85 }}
@@ -90,7 +105,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
           >
             더보기
           </button>
-        ) : null}
+        ) : null} */}
       </div>
     </>
   );
