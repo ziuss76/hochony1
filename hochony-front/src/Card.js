@@ -15,7 +15,7 @@ function Card({ hochony }) {
         onClick={() => {
           navigate("/detail/" + id);
         }}
-        src={"https://storage.googleapis.com/hochony/hocho" + id + ".webp"}
+        src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + id + ".webp"}
         alt=""
         width="90%"
       />

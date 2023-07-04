@@ -15,7 +15,7 @@ function Login() {
   return (
     <>
       <Container className="col-md-4">
-        <img src={"https://storage.googleapis.com/hochony/hochonylogin.webp"} className="product mt-3" width="94%" />
+        <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonylogin.webp"} className="product mt-3" width="94%" />
         <div className="product-box">{accessToken ? <h6>어이, 가는거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
         {accessToken ? (
           <button className="buttonPink mb-5" role="button" onClick={handleLogOut}>

@@ -34,7 +34,7 @@ function Detail({ hochony }) {
     <>
       <Container className="col-md-4">
         <div className="mx-auto">
-          <img src={"https://storage.googleapis.com/hochony/hocho" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
+          <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
         </div>
 
         {alert === true ? (
