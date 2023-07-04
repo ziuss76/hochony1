@@ -14,10 +14,6 @@ import "./Button.scss";
 import axios from "axios";
 import ScrollTop from "./ScrollTop";
 
-// import Data2 from "./data2.json";
-// 주소창에 detail/3 부터 안뜨는 이유는 주소창에 치면 새로고침 됨
-// 그래서 hochony가 3개밖에 없는 상태로 돌아감
-
 function App() {
   const [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
   const [검색, 검색변경] = useState("");
@@ -61,7 +57,7 @@ function App() {
                 size="sm"
                 style={{ width: "3rem" }}
                 onClick={() => {
-                  axios //axios는 JSON 을 예쁘게 Object 형으로 바꿔줌 즉 따옴표 다 떼줌! fetch는 그런거 없음ㅅㄱ
+                  axios
                     .get("/search?value=" + 검색)
                     .then((result) => {
                       //console.log(result.data) result.data 는 받아온 데이터

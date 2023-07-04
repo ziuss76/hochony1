@@ -1,5 +1,4 @@
 .my-alert {
-  font-family: "Open Sans", sans-serif;
   font-size: 20px;
   letter-spacing: 2px;
   text-decoration: none;
@@ -70,7 +69,6 @@
   box-sizing: border-box;
   color: #070929;
   cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
   list-style: none;
   position: relative;
   text-decoration: none;
@@ -88,7 +86,7 @@
   padding: 1rem;
   margin-bottom: 35px;
   width: 90%;
-  letter-spacing: -0.2px;
+  letter-spacing: 0.3px;
 }
 
 .product-box:focus {
