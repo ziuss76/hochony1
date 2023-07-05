@@ -16,22 +16,35 @@ function Tab({ 누른탭, 스위치변경, id }) {
   const [서버리뷰, 서버리뷰변경] = useState([]);
   const [별점, 별점변경] = useState(0);
 
-  const handleClose = () => setShow(false);
+  useEffect(() => {
+    const fetchData = () => {
+      axios
+        .get(`/getReview/${id}`)
+        .then((result) => {
+          서버리뷰변경([...result.data]);
+          console.log([...result.data]);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    };
+
+    const timeoutId = setTimeout(fetchData, 100); // 최대 60ms 걸리길래 이렇게 했더니 다시 잘 동작함
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [show]);
 
   useEffect(() => {
-    스위치변경(true); //컴포넌트가 등장, 로드될 때 true로 변경
+    스위치변경(true);
   });
+
+  const handleClose = () => setShow(false);
 
   const handleRating = (rate) => {
     별점변경(rate);
   };
-
-  useEffect(() => {
-    axios.get(`/getReview/${id}`).then((result) => {
-      서버리뷰변경([...result.data]);
-      console.log([...result.data]);
-    });
-  }, [show, id, 서버리뷰]); // 모달창의 show 상태변경 될 때 코드 실행
 
   if (누른탭 === 0) {
     return (
