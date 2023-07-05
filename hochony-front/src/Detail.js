@@ -63,7 +63,7 @@ function Detail({ hochony }) {
             className="buttonGreen"
             style={{ width: "85px" }}
             onClick={() => {
-              dispatch(addItem({ _id: 찾은상품._id, id: 찾은상품.id, name: 찾은상품.title, quan: 1 }));
+              dispatch(addItem({ _id: 찾은상품._id, id: 찾은상품.id, title: 찾은상품.title, content: 찾은상품.content, quan: 1 }));
               navigate("/cart");
             }}
           >

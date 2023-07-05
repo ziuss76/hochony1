@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./Button.scss";
 
-function Card({ hochony }) {
+function OrderCard({ order }) {
   let navigate = useNavigate();
-  const { id, title, content, price, quan } = hochony;
+  const { id, title, content, quan, address, phoneNumber } = order;
 
   return (
     <div className="col-md-4">
@@ -27,16 +27,12 @@ function Card({ hochony }) {
       >
         <h4 className="photoTitle">{title}</h4>
         <p>{content}</p>
-        {price ? (
-          <p>
-            {price} won / {quan} units
-          </p>
-        ) : (
-          <p>{quan} units</p>
-        )}
+        <p>{quan}개의 상품</p>
+        <p>{address}에 배송중⚡️</p>
+        <p>{phoneNumber}로 문자할게요💌</p>
       </div>
     </div>
   );
 }
 
-export default Card;
+export default OrderCard;

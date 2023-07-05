@@ -1,14 +1,12 @@
 import { Table, Modal, Form, Container } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Button.scss";
-import { addCount, subCount } from "./store";
+import { addCount, subCount, clearItems, orderUp, clearOrders } from "./store";
 
 function Cart() {
-  let state = useSelector((state) => state);
+  let cartState = useSelector((state) => state.cart); // state 는 리덕스 전역 상태 객체
   let dispatch = useDispatch();
-  let cartState = localStorage.getItem("cartState");
-  let cartStateArray = JSON.parse(cartState) || [];
 
   return (
     <Container className="col-md-4">
@@ -18,37 +16,41 @@ function Cart() {
             {/* tr: 가로행   td,th: 세로행 */}
             <th>사진</th>
             <th>상품명</th>
+            <th>내용</th>
             <th>수량</th>
             <th>변경</th>
           </tr>
         </thead>
         <tbody>
-          {cartStateArray[0] === null
+          {cartState.length === 0
             ? null
-            : cartStateArray.map((a, i) => (
+            : cartState.map((cartItem, i) => (
                 <tr key={i}>
-                  <td>{<img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + a.id + ".webp"} width="75px" />}</td>
-                  <td>{a.name}</td>
-                  <td>{a.quan}</td>
+                  <td>{<img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + cartItem.id + ".webp"} width="75px" />}</td>
+                  <td>{cartItem.title}</td>
+                  <td>{cartItem.content}</td>
+                  <td>{cartItem.quan}</td>
                   <td>
                     <div className="button-box">
                       <button
                         className="buttonOrange"
+                        style={{ fontSize: "28px", paddingBottom: "5px" }}
                         role="button"
                         onClick={() => {
-                          dispatch(subCount(a.id));
+                          dispatch(subCount(cartItem.id));
                         }}
                       >
-                        -1
+                        -
                       </button>
                       <button
                         className="buttonGreen"
+                        style={{ fontSize: "22px", paddingBottom: "4px" }}
                         role="button"
                         onClick={() => {
-                          dispatch(addCount(a.id));
+                          dispatch(addCount(cartItem.id));
                         }}
                       >
-                        +1
+                        +
                       </button>
                     </div>
                   </td>
@@ -62,8 +64,44 @@ function Cart() {
 }
 function 주문하기() {
   const [show, setShow] = useState(false);
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const addressRef = useRef(null);
+  const phoneNumberRef = useRef(null);
+
+  let cartState = useSelector((state) => state.cart);
+  let orderState = useSelector((state) => state.order); // state 는 리덕스 전역 상태 객체
+  let dispatch = useDispatch();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    console.log(address, phoneNumber);
+  }, [address, phoneNumber]);
+
+  const handleOrder = () => {
+    const addressValue = addressRef.current.value;
+    const phoneNumberValue = phoneNumberRef.current.value;
+
+    setAddress(addressValue);
+    setPhoneNumber(phoneNumberValue);
+
+    const orderState = cartState.map((item) => ({
+      ...item,
+      address: addressValue,
+      phoneNumber: phoneNumberValue,
+    }));
+
+    dispatch(orderUp(orderState));
+
+    // dispatch로 세 값을 보내고 초기화
+    setAddress("");
+    setPhoneNumber("");
+    dispatch(clearItems(cartState));
+
+    handleClose();
+  };
 
   return (
     <>
@@ -78,9 +116,9 @@ function 주문하기() {
         <Form>
           <Form.Group className="p-3" controlId="formGridAddress1">
             <Form.Label>주소</Form.Label>
-            <Form.Control placeholder="호천로1번길 83 106동 301호" />
+            <Form.Control ref={addressRef} placeholder="호천로1번길 83 106동 301호" />
             <Form.Label className="mt-3">전화번호</Form.Label>
-            <Form.Control placeholder="01012345678" />
+            <Form.Control ref={phoneNumberRef} placeholder="01012345678" />
           </Form.Group>
         </Form>
         <Modal.Body>호천이도 주소는 알아야 새벽배송을 가지;;😅</Modal.Body>
@@ -88,7 +126,7 @@ function 주문하기() {
           <button className="buttonGray" role="button" onClick={handleClose}>
             닫기
           </button>
-          <button className="buttonPink" role="button" onClick={handleClose}>
+          <button className="buttonPink" role="button" onClick={handleOrder}>
             배송
           </button>
         </Modal.Footer>

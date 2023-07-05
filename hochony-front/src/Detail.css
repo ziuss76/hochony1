@@ -102,3 +102,9 @@
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
