@@ -1,8 +1,8 @@
 import { Table, Modal, Form, Container } from "react-bootstrap";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Button.scss";
-import { addCount, subCount, clearItems, orderUp, clearOrders } from "./store";
+import { addCount, subCount, clearItems, orderUp } from "./store";
 
 function Cart() {
   let cartState = useSelector((state) => state.cart); // state 는 리덕스 전역 상태 객체
@@ -70,15 +70,10 @@ function 주문하기() {
   const phoneNumberRef = useRef(null);
 
   let cartState = useSelector((state) => state.cart);
-  let orderState = useSelector((state) => state.order); // state 는 리덕스 전역 상태 객체
   let dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    console.log(address, phoneNumber);
-  }, [address, phoneNumber]);
 
   const handleOrder = () => {
     const addressValue = addressRef.current.value;
@@ -95,7 +90,7 @@ function 주문하기() {
 
     dispatch(orderUp(orderState));
 
-    // dispatch로 세 값을 보내고 초기화
+    // dispatch로 보낸 뒤 세 값을 초기화
     setAddress("");
     setPhoneNumber("");
     dispatch(clearItems(cartState));
@@ -116,9 +111,9 @@ function 주문하기() {
         <Form>
           <Form.Group className="p-3" controlId="formGridAddress1">
             <Form.Label>주소</Form.Label>
-            <Form.Control ref={addressRef} placeholder="호천로1번길 83 106동 301호" />
+            <Form.Control ref={addressRef} defaultValue={""} placeholder="호천로 1번길 83 106동 301호" />
             <Form.Label className="mt-3">전화번호</Form.Label>
-            <Form.Control ref={phoneNumberRef} placeholder="01012345678" />
+            <Form.Control ref={phoneNumberRef} defaultValue={""} placeholder="01012345678" />
           </Form.Group>
         </Form>
         <Modal.Body>호천이도 주소는 알아야 새벽배송을 가지;;😅</Modal.Body>
