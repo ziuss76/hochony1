@@ -34,7 +34,7 @@ function Cart() {
                     <div className="button-box">
                       <button
                         className="buttonOrange"
-                        style={{ fontSize: "28px", paddingBottom: "5px" }}
+                        style={{ fontSize: "28px" }}
                         role="button"
                         onClick={() => {
                           dispatch(subCount(cartItem.id));
@@ -44,7 +44,7 @@ function Cart() {
                       </button>
                       <button
                         className="buttonGreen"
-                        style={{ fontSize: "22px", paddingBottom: "4px" }}
+                        style={{ fontSize: "22px" }}
                         role="button"
                         onClick={() => {
                           dispatch(addCount(cartItem.id));
