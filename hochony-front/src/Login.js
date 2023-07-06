@@ -4,32 +4,44 @@ import "./Button.scss";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 import OrderCard from "./OrderCard.js";
 import { clearOrders } from "./store";
+import axios from "axios";
 
 function Login() {
-  const [userDetail, setUserDetail] = useState({});
-  const accessToken = sessionStorage.getItem("accessToken");
+  const userDetail = JSON.parse(sessionStorage.getItem("userDetail") || null);
   let dispatch = useDispatch();
   let orderState = useSelector((state) => state.order);
 
   const handleLogOut = () => {
-    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("userDetail");
     window.location.href = "/";
   };
 
-  useEffect(() => {
-    if (accessToken) {
-      const userDetail = jwt_decode(accessToken);
-      const { name, picture } = userDetail;
-      setUserDetail({ name, picture });
+  const handleGoogleLogin = async (res) => {
+    try {
+      const accessToken = res.credential;
+      // 액세스 토큰을 서버로 전송
+      const response = await axios.post("/login", { accessToken });
+
+      if (response.data.name && response.data.picture) {
+        const userDetail = {
+          name: response.data.name,
+          picture: response.data.picture,
+        };
+        sessionStorage.setItem("userDetail", JSON.stringify(userDetail));
+        window.location.href = "/";
+      } else {
+        console.log("Invalid response from server");
+      }
+    } catch (error) {
+      console.log("Login Failed", error);
     }
-  }, []);
+  };
 
   return (
     <>
-      {accessToken ? (
+      {userDetail ? (
         <>
           <div className="product-box">
             {orderState.length !== 0 ? (
@@ -57,8 +69,8 @@ function Login() {
 
       <Container className="col-lg-4">
         <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonylogin.webp"} className="product mt-3" width="94%" />
-        <div className="product-box">{accessToken ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
-        {accessToken ? (
+        <div className="product-box">{userDetail ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
+        {userDetail ? (
           <>
             <button className="buttonPink mb-5" role="button" onClick={handleLogOut}>
               로그아웃
@@ -76,18 +88,7 @@ function Login() {
             </div>
             <div className="googleBox">
               <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                <GoogleLogin
-                  text="signin_with"
-                  shape="pill"
-                  onSuccess={(res) => {
-                    const accessToken = res.credential;
-                    sessionStorage.setItem("accessToken", accessToken);
-                    window.location.href = "/";
-                  }}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
+                <GoogleLogin text="signin_with" shape="pill" onSuccess={handleGoogleLogin} />
               </GoogleOAuthProvider>
             </div>
           </>

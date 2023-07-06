@@ -24,6 +24,29 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
     }
   }, [더보기]);
 
+  const handleGoogleLogin = async (res) => {
+    try {
+      const accessToken = res.credential;
+      // 액세스 토큰을 서버로 전송
+      const response = await axios.post("/login", { accessToken });
+
+      if (response.data.name && response.data.picture) {
+        const userDetail = {
+          name: response.data.name,
+          picture: response.data.picture,
+        };
+        sessionStorage.setItem("userDetail", JSON.stringify(userDetail));
+        로그인완료변경(true);
+        구글로그인변경(false);
+        더보기변경(true);
+      } else {
+        console.log("Invalid response from server");
+      }
+    } catch (error) {
+      console.log("Login Failed", error);
+    }
+  };
+
   return (
     <>
       <Container className="col-lg-10">
@@ -68,20 +91,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
         {구글로그인 === true ? (
           <div className="googleBox">
             <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-              <GoogleLogin
-                text="signin_with"
-                shape="pill"
-                onSuccess={(res) => {
-                  const accessToken = res.credential;
-                  sessionStorage.setItem("accessToken", accessToken);
-                  로그인완료변경(true);
-                  구글로그인변경(false);
-                  더보기변경(true);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
+              <GoogleLogin text="signin_with" shape="pill" onSuccess={handleGoogleLogin} />
             </GoogleOAuthProvider>
           </div>
         ) : null}

@@ -5,6 +5,7 @@ import bodyParser from "body-parser"; // 요청데이터(body) 해석을 쉽게 
 import dotenv from "dotenv";
 import cors from "cors";
 import { fileURLToPath } from "url"; // 파일경로 읽는 fileURLToPath 함수 필요
+import jwt_decode from "jwt-decode";
 
 const app = express();
 app.use(express.json());
@@ -70,6 +71,19 @@ app.get("/search", (req, res) => {
       // console.log(result);
       res.json(result);
     });
+});
+
+app.post("/login", (req, res) => {
+  const { accessToken } = req.body;
+  try {
+    const decodedToken = jwt_decode(accessToken);
+    const { name, picture } = decodedToken;
+
+    res.json({ name, picture });
+  } catch (error) {
+    console.log("Failed to decode access token", error);
+    res.status(400).json({ error: "Invalid access token" });
+  }
 });
 
 app.get("/getReview/:id", (req, res) => {
