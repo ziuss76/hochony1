@@ -48,7 +48,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
 
   if (누른탭 === 0) {
     return (
-      <Container className="col-md-4">
+      <Container className="col-lg-4">
         <div className="product-box">
           <Rating onClick={handleRating} rating={별점} />
           <InputGroup

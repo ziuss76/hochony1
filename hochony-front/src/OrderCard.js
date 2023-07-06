@@ -9,7 +9,7 @@ function OrderCard({ order }) {
   const { id, title, content, quan, address, phoneNumber } = order;
 
   return (
-    <div className="col-md-4">
+    <div className="col-lg-4">
       <img
         className="product-img"
         onClick={() => {

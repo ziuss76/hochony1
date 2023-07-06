@@ -34,13 +34,13 @@ function Login() {
           <div className="product-box">
             {orderState.length !== 0 ? (
               <div className="center">
-                <img src={userDetail.picture} style={{ width: "5%", marginRight: "15px" }} />
-                <h4 style={{ margin: 0 }}>{userDetail.name}님의 호처니 구매내역이에요!</h4>
+                <img src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
+                <h5 style={{ margin: 0 }}>{userDetail.name}님의 구매내역이에요!</h5>
               </div>
             ) : (
               <div className="center">
-                <img src={userDetail.picture} style={{ width: "5%", marginRight: "15px" }} />
-                <h4 style={{ margin: 0 }}>{userDetail.name}님의 호처니 구매내역이 비어있어요! </h4>
+                <img src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
+                <h5 style={{ margin: 0 }}>{userDetail.name}님의 구매내역이 비었어요! </h5>
               </div>
             )}
           </div>
@@ -55,7 +55,7 @@ function Login() {
         </>
       ) : null}
 
-      <Container className="col-md-4">
+      <Container className="col-lg-4">
         <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonylogin.webp"} className="product mt-3" width="94%" />
         <div className="product-box">{accessToken ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
         {accessToken ? (

@@ -9,7 +9,7 @@ function Card({ hochony }) {
   const { id, title, content, price, quan } = hochony;
 
   return (
-    <div className="col-md-4">
+    <div className="col-lg-4">
       <img
         className="product-img"
         onClick={() => {

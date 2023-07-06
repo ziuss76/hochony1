@@ -41,7 +41,7 @@ function App() {
           <Nav.Link as={Link} to="/">
             <img alt="" src="https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochoicon.jpeg" width="35px" height="35px" className="hochoicon" />
           </Nav.Link>
-          <Container className="col-md-4">
+          <Container className="col-lg-4">
             <InputGroup
               className="ms-4"
               onChange={(e) => {

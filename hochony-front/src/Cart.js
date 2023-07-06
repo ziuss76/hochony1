@@ -9,7 +9,7 @@ function Cart() {
   let dispatch = useDispatch();
 
   return (
-    <Container className="col-md-4">
+    <Container className="col-lg-6">
       <Table>
         <thead>
           <tr>

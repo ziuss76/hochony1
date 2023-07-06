@@ -26,7 +26,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
 
   return (
     <>
-      <Container className="col-md-10">
+      <Container className="col-lg-10">
         <Carousel className="my-5 mx-3 Carousel">
           <Carousel.Item interval={1500}>
             <img className="d-block w-100" src="https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonybg1.webp" alt="First slide" />

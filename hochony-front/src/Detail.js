@@ -32,7 +32,7 @@ function Detail({ hochony }) {
 
   return (
     <>
-      <Container className="col-md-4">
+      <Container className="col-lg-4">
         <div className="mx-auto">
           <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
         </div>
@@ -72,7 +72,7 @@ function Detail({ hochony }) {
         </div>
       </Container>
 
-      <Container className="col-md-4">
+      <Container className="col-lg-4">
         <Nav className="mt-2" fill variant="tabs" defaultActiveKey="link-0">
           <Nav.Item>
             <Nav.Link
