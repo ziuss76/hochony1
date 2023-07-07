@@ -20,9 +20,7 @@ function Login() {
 
   const handleGoogleLogin = async (res) => {
     try {
-      const accessToken = res.credential;
-      // 액세스 토큰을 서버로 전송
-      const response = await axios.post("/login", { accessToken });
+      const response = await axios.post("/login", { accessToken: res.credential });
 
       if (response.data.name && response.data.picture) {
         const userDetail = {
