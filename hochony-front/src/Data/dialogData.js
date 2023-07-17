@@ -1,9 +1,6 @@
-const userDetail = sessionStorage.getItem("userDetail");
-const userName = userDetail ? JSON.parse(userDetail).name : "노네임";
-
 export default [
   "이곳에 오는 인간들이 점점 늘어나는군",
-  `${userName}...? 이상한 이름이야`,
+  "이름도 아주 이상하구만",
   "하여튼 인간들은",
   "이름 짓는 센스가 떨어진단 말이지",
   "그것보다 자네",

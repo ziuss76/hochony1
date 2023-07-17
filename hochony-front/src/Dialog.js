@@ -1,9 +1,8 @@
 import "./Dialog.css";
 import "./Button.scss";
-import dialogData from "./Data/dialogData";
 import { useState, useEffect } from "react";
 
-function Dialog() {
+function Dialog({ userName, dialogData }) {
   const isByed = JSON.parse(sessionStorage.getItem("isByed"));
   const [bye, setBye] = useState(false);
 
@@ -24,7 +23,7 @@ function Dialog() {
         <>
           {dialogData.map((dialog, i) => (
             <p className="dialog" key={i}>
-              {dialog}
+              {i === 1 ? `${userName}...? 이름도 이상하구만` : dialog}
             </p>
           ))}
           <button className="buttonGray" style={{ margin: "25rem 0" }} onClick={Bye}>
