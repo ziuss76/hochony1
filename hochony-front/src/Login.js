@@ -1,10 +1,9 @@
 import { Container, Badge } from "react-bootstrap";
-import { useState, useEffect } from "react";
 import "./Button.scss";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
-import OrderCard from "./OrderCard.js";
+import OrderCard from "./OrderCard";
 import { clearOrders } from "./store";
 import axios from "axios";
 
@@ -44,12 +43,12 @@ function Login() {
           <div className="product-box">
             {orderState.length !== 0 ? (
               <div className="center">
-                <img src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
+                <img alt="구매내역" src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
                 <h5 style={{ margin: 0 }}>{userDetail.name}님의 구매내역이에요!</h5>
               </div>
             ) : (
               <div className="center">
-                <img src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
+                <img alt="빈 구매내역" src={userDetail.picture} style={{ width: "30px", marginRight: "15px" }} />
                 <h5 style={{ margin: 0 }}>{userDetail.name}님의 구매내역이 비었어요! </h5>
               </div>
             )}
@@ -66,7 +65,7 @@ function Login() {
       ) : null}
 
       <Container className="col-lg-4">
-        <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonylogin.webp"} className="product mt-3" width="94%" />
+        <img alt="거만 호천" src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonylogin.webp"} className="product mt-3" width="94%" />
         <div className="product-box">{userDetail ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
         {userDetail ? (
           <>

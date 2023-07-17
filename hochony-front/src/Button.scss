@@ -9,6 +9,7 @@ td {
 }
 @mixin 버튼() {
   appearance: button;
+  width: auto;
   border: solid transparent;
   border-radius: 16px;
   border-width: 0 0 4px;
@@ -39,40 +40,36 @@ td {
 .buttonPink {
   @include 버튼();
   background-color: salmon;
-  width: 100px;
+  padding: 8px 20px;
 }
 .buttonGray {
   @include 버튼();
   background-color: #353535;
-  width: 100px;
+  padding: 8px 20px;
 }
 .buttonOrange {
   @include 버튼();
   background-color: rgb(207, 82, 24);
   border-radius: 18px;
   padding: 6px 3px;
-  width: 39px;
 }
 .buttonGreen {
   @include 버튼();
   background-color: rgb(57, 158, 99);
   border-radius: 18px;
   padding: 6px 3px;
-  width: 39px;
 }
 .buttonRed {
   @include 버튼();
   background-color: rgb(167, 20, 12);
   border-radius: 18px;
   padding: 6px 3px;
-  width: 39px;
 }
 .buttonYellow {
   @include 버튼();
   background-color: rgb(233, 175, 17);
   padding: 7px 14px;
   margin-bottom: 25px;
-  width: 100px;
   color: #494949;
 }
 @mixin 버튼애프터() {

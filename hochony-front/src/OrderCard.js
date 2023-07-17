@@ -1,7 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import "./Button.scss";
 
 function OrderCard({ order }) {

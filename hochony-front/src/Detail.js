@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Nav, Container } from "react-bootstrap";
 import "./Detail.css";
@@ -18,13 +18,9 @@ function Detail({ hochony }) {
       alert변경(false);
     }, 1300);
     return () => {
-      clearTimeout(타이머); //2초 전에 나갔을 때 버그 방지용, 이 전 타이머 꺼서 중첩 방지
+      clearTimeout(타이머); // 2초 전에 나갔을 때 버그 방지용, 이전 타이머 꺼서 중첩 방지
     };
   }, []);
-
-  // useEffect 안 콜백함수 안에는 컴포넌트가 첫 등장, 업데이트 시 실행할 것
-  // return 안 함수는 컴포넌트가 사라질 때 실행할 것
-  // 업데이트 되어도 실행 안되게 하는 법 끝에 [] 붙이기
 
   const navigate = useNavigate();
   const { id } = useParams(); // {id}는 :id 자리에 있던 숫자
@@ -34,7 +30,7 @@ function Detail({ hochony }) {
     <>
       <Container className="col-lg-4">
         <div className="mx-auto">
-          <img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
+          <img alt="상품 이미지" src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
         </div>
 
         {alert === true ? (
@@ -54,7 +50,7 @@ function Detail({ hochony }) {
             className="buttonOrange"
             style={{ width: "85px" }}
             onClick={() => {
-              navigate(-1); //뒤로가기 1은 앞으로가기 2는 앞으로 2번 가기 등등
+              navigate(-1); //뒤로가기 1은 앞으로가기 2는 앞으로 2번 가기
             }}
           >
             뒤로가기

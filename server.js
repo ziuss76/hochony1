@@ -8,8 +8,20 @@ import { fileURLToPath } from "url"; // 파일경로 읽는 fileURLToPath 함수
 import jwt_decode from "jwt-decode";
 
 const app = express();
+// Middleware
 app.use(express.json());
-app.use(cors()); //nodejs 와 react 사이 ajax 요청 사용하기
+app.use(
+  cors({
+    // * 대신 true 쓰는 이유: 브라우저가 요청을 보내는 도메인 (Origin)을 확인할 수 있게 해주고
+    // 나중에 서버에서 허용할 도메인을 동적으로 결정할 수 있도록 함, 그래서 확장성에도 유리
+    origin: ["hochony.com", "http://localhost:8080"],
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // 나중에 쿠키에 저장된 인증정보를 함께 전송할 때 필요함
+    maxAge: 7200, // 2시간 동안 preflight 요청 중복을 막아줌, 실제 데이터 요청 전에 보내는 CORS 허용을 위한 요청
+    optionsSuccessStatus: 200, // 이 프리플라이트 요청에 대한 응답 코드
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 dotenv.config();
 
@@ -48,28 +60,39 @@ app.get("/content", (req, res) => {
   db.collection("Data")
     .find()
     .toArray((err, result) => {
-      // console.log(result);
+      result.sort((a, b) => a.id - b.id);
       res.json(result);
     });
 });
 
 app.get("/search", (req, res) => {
-  const 검색조건 = [
-    {
-      $search: {
-        index: "titleSearch",
-        text: {
-          query: req.query.value,
-          path: ["title", "content"], // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+  let 검색조건 = [];
+  if (!req.query.value) {
+    검색조건 = [];
+  } else {
+    검색조건 = [
+      {
+        $search: {
+          index: "titleSearch",
+          text: {
+            query: req.query.value,
+            path: ["title", "content"], // 제목과 내용에서 검색하도록 설정합니다
+          },
         },
       },
-    },
-  ];
+    ];
+  }
+
   db.collection("Data")
     .aggregate(검색조건)
     .toArray((err, result) => {
-      // console.log(result);
-      res.json(result);
+      if (err) {
+        console.log("불러오기 실패!");
+        res.status(500).send("불러오기 실패!");
+      } else {
+        result.sort((a, b) => a.id - b.id); // 데이터를 id 기준으로 정렬합니다.
+        res.json(result);
+      }
     });
 });
 
@@ -91,7 +114,6 @@ app.get("/getReview/:id", (req, res) => {
   db.collection("Review")
     .find({ id: parseInt(id) })
     .toArray((err, result) => {
-      // console.log(result);
       res.json(result);
     });
 });
@@ -119,9 +141,7 @@ app.put("/putReview", (req, res) => {
 });
 
 app.delete("/deleteReview", (req, res) => {
-  db.collection("Review").deleteOne(req.body, (err, result) => {
-    // console.log("삭제완료");
-  });
+  db.collection("Review").deleteOne(req.body, (err, result) => {});
   res.send("삭제완료");
 });
 

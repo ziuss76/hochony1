@@ -1,7 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import "./Button.scss";
 
 function Card({ hochony }) {
@@ -16,7 +15,7 @@ function Card({ hochony }) {
           navigate("/detail/" + id);
         }}
         src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + id + ".webp"}
-        alt=""
+        alt="이미지 로딩중.."
         width="90%"
       />
       <div

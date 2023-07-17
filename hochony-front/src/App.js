@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Data from "./data.js"; // Data 자리엔 자유롭게 작명가능
-import Detail from "./Detail.js";
-import Cart from "./Cart.js";
-import Main from "./Main.js";
-import Login from "./Login.js";
+import Data from "./Data/firstHochoData"; // Data 자리엔 자유롭게 작명가능
+import Detail from "./Detail";
+import Cart from "./Cart";
+import Main from "./Main";
+import Login from "./Login";
 import "./Button.scss";
 import axios from "axios";
 import ScrollTop from "./ScrollTop";
@@ -22,8 +22,8 @@ function App() {
   const [로그인완료, 로그인완료변경] = useState(false);
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem("accessToken");
-    if (!accessToken) {
+    const userDetail = sessionStorage.getItem("userDetail");
+    if (!userDetail) {
       로그인완료변경(false);
       구글로그인변경(true);
       더보기변경(false);

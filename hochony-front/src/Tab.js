@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, InputGroup, Form, Modal, Card } from "react-bootstrap";
 import "./Detail.css";
 import "./Button.scss";
