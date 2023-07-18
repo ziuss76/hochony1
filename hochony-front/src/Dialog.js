@@ -1,4 +1,4 @@
-import "./Dialog.css";
+import "./Dialog.scss";
 import "./Button.scss";
 import { useState, useEffect } from "react";
 
@@ -21,10 +21,13 @@ function Dialog({ userName, dialogData }) {
     <>
       {!bye && (
         <>
+          <section className="startSection" />
           {dialogData.map((dialog, i) => (
-            <p className="dialog" key={i}>
-              {i === 1 ? `${userName}...? 이름도 이상하구만` : dialog}
-            </p>
+            <section className="dialogSection" key={i}>
+              <p className="dialog" key={i}>
+                {i === 1 ? `${userName}...? 이름도 이상하구만` : dialog}
+              </p>
+            </section>
           ))}
           <button className="buttonGray" style={{ margin: "25rem 0" }} onClick={Bye}>
             잘 있어 호천아

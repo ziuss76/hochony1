@@ -1,27 +1,15 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Badge } from "react-bootstrap";
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useEffect } from "react";
 import Card from "./Card";
 import Carousel from "./Carousel";
 import "./Button.scss";
 import axios from "axios";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
-import dialogData from "./Data/dialogData";
-const LazyDialog = lazy(() => import("./Dialog"));
 
 function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 로그인완료변경, 더보기, 더보기변경 }) {
-  const [userName, setUserName] = useState("노네임");
-
-  useEffect(() => {
-    const userDetail = sessionStorage.getItem("userDetail");
-    if (userDetail) {
-      const parsedUserDetail = JSON.parse(userDetail);
-      setUserName(parsedUserDetail.name);
-    }
-  }, [구글로그인]);
-
   useEffect(() => {
     if (더보기) {
       axios
@@ -80,12 +68,6 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
               </GoogleOAuthProvider>
             </div>
           </>
-        )}
-        {/* <Dialog /> */}
-        {!구글로그인 && (
-          <Suspense fallback={<div>Loading...</div>}>
-            <LazyDialog userName={userName} dialogData={dialogData} />
-          </Suspense>
         )}
       </div>
     </>
