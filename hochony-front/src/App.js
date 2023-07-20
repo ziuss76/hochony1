@@ -13,9 +13,6 @@ import Login from "./Login";
 import "./Button.scss";
 import axios from "axios";
 import ScrollTop from "./ScrollTop";
-import Dialog from "./Dialog";
-import dialogData from "./Data/dialogData";
-const LazyDialog = lazy(() => import("./Dialog"));
 
 function App() {
   const [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
@@ -23,17 +20,8 @@ function App() {
   const [더보기, 더보기변경] = useState(false);
   const [구글로그인, 구글로그인변경] = useState(true);
   const [로그인완료, 로그인완료변경] = useState(false);
-  const [userName, setUserName] = useState("노네임");
   const [showNavbar, setShowNavbar] = useState(true);
   const scrollingRef = useRef();
-
-  useEffect(() => {
-    const userDetail = sessionStorage.getItem("userDetail");
-    if (userDetail) {
-      const parsedUserDetail = JSON.parse(userDetail);
-      setUserName(parsedUserDetail.name);
-    }
-  }, [구글로그인]);
 
   useEffect(() => {
     const userDetail = sessionStorage.getItem("userDetail");
@@ -79,15 +67,15 @@ function App() {
             <img alt="" src="https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochoicon.jpeg" width="35px" height="35px" className="hochoicon" />
           </Nav.Link>
           <Container className="col-lg-4">
-            <InputGroup
-              className="ms-4"
-              onChange={(e) => {
-                e.preventDefault();
-                검색변경(e.target.value);
-                console.log(e.target.value);
-              }}
-            >
-              <Form.Control placeholder="Hochony Shop" />
+            <InputGroup className="ms-4">
+              <Form.Control
+                placeholder="Hochony Shop"
+                className="no-outline"
+                onChange={(e) => {
+                  e.preventDefault();
+                  검색변경(e.target.value);
+                }}
+              />
               <button
                 type="search"
                 className="me-1 buttonSearch"
@@ -148,13 +136,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-
-      <Dialog userName={userName} dialogData={dialogData} />
-      {/* {!구글로그인 && (
-          <Suspense fallback={<div>Loading...</div>}>
-            <LazyDialog userName={userName} dialogData={dialogData} />
-          </Suspense>
-        )} */}
     </div>
   );
 }
