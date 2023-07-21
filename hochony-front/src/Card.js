@@ -14,7 +14,15 @@ function Card({ hochony }) {
         onClick={() => {
           navigate("/detail/" + id);
         }}
-        src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + id + ".webp"}
+        src={
+          id === 0
+            ? require("./assets/hochonypic0.webp")
+            : id === 1
+            ? require("./assets/hochonypic1.webp")
+            : id === 2
+            ? require("./assets/hochonypic2.webp")
+            : "https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + id + ".webp"
+        }
         alt="이미지 로딩중.."
         width="90%"
       />

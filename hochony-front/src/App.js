@@ -69,7 +69,7 @@ function App() {
       <Navbar sticky="top" bg="light" variant="light" className={`navbar ${!showNavbar ? "slide-up" : "slide-down"}`}>
         <Container fluid>
           <Nav.Link as={Link} to="/" aria-label="Home Page">
-            <img alt="" src="https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochoicon.jpeg" width="35px" height="35px" className="hochoicon" />
+            <img alt="호처니아이콘" src={require("./assets/hochoicon.png")} width="35px" height="35px" className="hochoicon" />
           </Nav.Link>
           <Container className="col-lg-4">
             <InputGroup className="ms-4">
