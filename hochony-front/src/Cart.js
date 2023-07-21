@@ -31,7 +31,7 @@ function Cart() {
             ? null
             : cartState.map((cartItem, i) => (
                 <tr key={i}>
-                  <td>{<img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + cartItem.id + ".webp"} width="75px" />}</td>
+                  <td>{<img src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + cartItem.id + ".webp"} width="75" height="75" />}</td>
                   <td>{cartItem.title}</td>
                   <td>{cartItem.content}</td>
                   <td>{cartItem.quan}</td>
@@ -39,7 +39,7 @@ function Cart() {
                     <div className="button-box">
                       <button
                         className="buttonOrange"
-                        style={{ fontSize: "26px", padding: "6px" }}
+                        style={{ fontSize: "26px", padding: "7px 12px" }}
                         role="button"
                         aria-label="buttonMinus"
                         onClick={() => {
@@ -50,7 +50,7 @@ function Cart() {
                       </button>
                       <button
                         className="buttonGreen"
-                        style={{ fontSize: "22px", padding: "6px" }}
+                        style={{ fontSize: "22px", padding: "7px 11px" }}
                         role="button"
                         aria-label="buttonPlus"
                         onClick={() => {

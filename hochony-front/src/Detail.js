@@ -35,7 +35,21 @@ function Detail({ hochony }) {
       </Helmet>
       <Container className="col-lg-4">
         <div className="mx-auto">
-          <img alt="상품 이미지" src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />
+          <img
+            alt="상품 이미지"
+            src={
+              찾은상품.id === 0
+                ? require("./assets/hochonypic0.webp")
+                : 찾은상품.id === 1
+                ? require("./assets/hochonypic1.webp")
+                : 찾은상품.id === 2
+                ? require("./assets/hochonypic2.webp")
+                : "https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"
+            }
+            className="product-img"
+            width="500"
+            height="500"
+          />
         </div>
 
         {alert === true ? (

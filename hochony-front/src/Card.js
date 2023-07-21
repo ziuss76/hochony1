@@ -24,7 +24,8 @@ function Card({ hochony }) {
             : "https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + id + ".webp"
         }
         alt="이미지 로딩중.."
-        width="90%"
+        width="500"
+        height="500"
       />
       <div
         className="product-box"

@@ -70,7 +70,7 @@ function Login() {
       ) : null}
 
       <Container className="col-lg-4">
-        <img alt="거만 호천" src={require("./assets/hochonylogin.webp")} className="product mt-3" width="94%" />
+        <img alt="거만 호천" src={require("./assets/hochonylogin.webp")} className="product-img mt-3" width="500" height="500" />
         <div className="product-box">{userDetail ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
         {userDetail ? (
           <>
