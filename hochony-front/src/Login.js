@@ -6,6 +6,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import OrderCard from "./OrderCard";
 import { clearOrders } from "./store";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
   const userDetail = JSON.parse(sessionStorage.getItem("userDetail") || null);
@@ -38,6 +39,10 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Hochony Login</title>
+        <link rel="canonical" href="https://hochony.com/login" />
+      </Helmet>
       {userDetail ? (
         <>
           <div className="product-box">

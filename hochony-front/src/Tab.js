@@ -22,7 +22,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
         .get(`/getReview/${id}`)
         .then((result) => {
           서버리뷰변경([...result.data]);
-          console.log([...result.data]);
+          // console.log([...result.data]);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);

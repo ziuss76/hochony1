@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Button.scss";
 import { addCount, subCount, clearItems, orderUp } from "./store";
+import { Helmet } from "react-helmet-async";
 
 function Cart() {
   let cartState = useSelector((state) => state.cart); // state 는 리덕스 전역 상태 객체
@@ -10,6 +11,10 @@ function Cart() {
 
   return (
     <Container className="col-lg-6">
+      <Helmet>
+        <title>Hochony Cart</title>
+        <link rel="canonical" href="https://hochony.com/cart" />
+      </Helmet>
       <Table>
         <thead>
           <tr>

@@ -6,6 +6,7 @@ import "./Button.scss";
 import { useDispatch } from "react-redux";
 import { addItem } from "./store";
 import Tab from "./Tab";
+import { Helmet } from "react-helmet-async";
 
 function Detail({ hochony }) {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ function Detail({ hochony }) {
 
   return (
     <>
+      <Helmet>
+        <title>{`Hochony #${찾은상품.id}`}</title>
+        <link rel="canonical" href={"https://hochony.com" + "/detail/" + 찾은상품.id} />
+      </Helmet>
       <Container className="col-lg-4">
         <div className="mx-auto">
           <img alt="상품 이미지" src={"https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochonypic" + 찾은상품.id + ".webp"} className="product-img" width="94%" />

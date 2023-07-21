@@ -4,7 +4,7 @@ import { Navbar, Container, Nav, Form, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link, Route, Routes } from "react-router-dom";
-import React, { useState, useEffect, lazy, Suspense, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Data from "./Data/firstHochoData"; // Data 자리엔 자유롭게 작명가능
 import Detail from "./Detail";
 import Cart from "./Cart";
@@ -13,6 +13,7 @@ import Login from "./Login";
 import "./Button.scss";
 import axios from "axios";
 import ScrollTop from "./ScrollTop";
+import { Helmet } from "react-helmet-async";
 
 function App() {
   const [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
@@ -61,6 +62,10 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>Hochony Shop</title>
+        <link rel="canonical" href="https://hochony.com" />
+      </Helmet>
       <Navbar sticky="top" bg="light" variant="light" className={`navbar ${!showNavbar ? "slide-up" : "slide-down"}`}>
         <Container fluid>
           <Nav.Link as={Link} to="/">
