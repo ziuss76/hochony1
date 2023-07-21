@@ -41,6 +41,7 @@ function Cart() {
                         className="buttonOrange"
                         style={{ fontSize: "26px", padding: "6px" }}
                         role="button"
+                        aria-label="buttonMinus"
                         onClick={() => {
                           dispatch(subCount(cartItem.id));
                         }}
@@ -51,6 +52,7 @@ function Cart() {
                         className="buttonGreen"
                         style={{ fontSize: "22px", padding: "6px" }}
                         role="button"
+                        aria-label="buttonPlus"
                         onClick={() => {
                           dispatch(addCount(cartItem.id));
                         }}

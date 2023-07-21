@@ -63,6 +63,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
           <button
             className="buttonPink mb-2"
             role="button"
+            aria-label="buttonSubmit"
             type="submit"
             onClick={() => {
               setShow(true);
@@ -89,6 +90,8 @@ function Tab({ 누른탭, 스위치변경, id }) {
                 className="buttonRed mt-3"
                 style={{ width: "85px" }}
                 type="submit"
+                role="button"
+                aria-label="buttonDelete"
                 onClick={() => {
                   setShow(true);
                   삭제할것변경({ data: 서버리뷰[i] });
@@ -104,6 +107,8 @@ function Tab({ 누른탭, 스위치변경, id }) {
                 className="buttonGreen mt-3"
                 style={{ width: "85px" }}
                 type="submit"
+                role="button"
+                aria-label="buttonChange"
                 onClick={() => {
                   setShow(true);
                   수정중id변경(서버리뷰[i]._id);
@@ -140,6 +145,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
             <button
               className="buttonPink"
               role="button"
+              aria-label="buttonConfirm"
               onClick={() => {
                 modalKind === "수정"
                   ? axios
@@ -172,7 +178,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonShipChange"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                >
                   배송지를 변경하고 싶어요.
                 </button>
               </h2>
@@ -190,7 +204,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonShipStart"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseTwo"
+                >
                   언제 배송이 시작되나요?
                 </button>
               </h2>
@@ -206,7 +228,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonWhichShip"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseThree"
+                >
                   어떤 택배사로 배송되나요?
                 </button>
               </h2>
@@ -229,7 +259,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonRefund"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                >
                   상품을 교환/반품하고 싶어요.
                 </button>
               </h2>
@@ -245,7 +283,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonCancel"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseTwo"
+                >
                   접수한 교환/반품을 취소하고 싶어요.
                 </button>
               </h2>
@@ -260,7 +306,15 @@ function Tab({ 누른탭, 스위치변경, id }) {
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  aria-label="buttonWhenRefund"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseThree"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseThree"
+                >
                   반품/취소했는데 금액은 언제 환불되나요?
                 </button>
               </h2>

@@ -74,10 +74,10 @@ function Login() {
         <div className="product-box">{userDetail ? <h6>어이 {userDetail.name}, 가는 거냐.</h6> : <h6>어이, 로그인이나 해라.</h6>}</div>
         {userDetail ? (
           <>
-            <button className="buttonPink mb-5" role="button" onClick={handleLogOut}>
+            <button className="buttonPink mb-5" role="button" aria-label="buttonLogOut" onClick={handleLogOut}>
               로그아웃
             </button>
-            <button className="buttonGray mb-5" role="button" onClick={() => dispatch(clearOrders(orderState))}>
+            <button className="buttonGray mb-5" role="button" aria-label="buttonDelete" onClick={() => dispatch(clearOrders(orderState))}>
               내역삭제
             </button>
           </>

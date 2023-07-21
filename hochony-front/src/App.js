@@ -68,7 +68,7 @@ function App() {
       </Helmet>
       <Navbar sticky="top" bg="light" variant="light" className={`navbar ${!showNavbar ? "slide-up" : "slide-down"}`}>
         <Container fluid>
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} to="/" aria-label="Home Page">
             <img alt="" src="https://ziuss-bucket.s3.ap-northeast-2.amazonaws.com/hochopic/hochoicon.jpeg" width="35px" height="35px" className="hochoicon" />
           </Nav.Link>
           <Container className="col-lg-4">
@@ -85,7 +85,9 @@ function App() {
                 type="search"
                 className="me-1 buttonSearch"
                 size="sm"
+                role="button"
                 style={{ width: "3rem" }}
+                aria-label="buttonSearch"
                 onClick={() => {
                   axios
                     .get("/search?value=" + 검색)
@@ -107,10 +109,10 @@ function App() {
           {/* Form, FormControl 쓰려면 Container 에 fluid 속성 필요! */}
           <Nav>
             <div className="icon">
-              <Nav.Link as={Link} to="/cart">
+              <Nav.Link as={Link} to="/cart" aria-label="Cart Page">
                 <FontAwesomeIcon icon={faCartPlus} className="nav-icon cart-icon" />
               </Nav.Link>
-              <Nav.Link as={Link} to="/login">
+              <Nav.Link as={Link} to="/login" aria-label="Login Page">
                 <FontAwesomeIcon icon={faUser} className="nav-icon login-icon" />
               </Nav.Link>
             </div>
