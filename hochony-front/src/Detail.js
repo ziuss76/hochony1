@@ -32,6 +32,8 @@ function Detail({ hochony }) {
       <Helmet>
         <title>{`Hochony #${찾은상품.id}`}</title>
         <link rel="canonical" href={"https://hochony.com" + "/detail/" + 찾은상품.id} />
+        <meta name="title" content={`${찾은상품.title}`}></meta>
+        <meta name="content" content={`${찾은상품.content}`}></meta>
       </Helmet>
       <Container className="col-lg-4">
         <div className="mx-auto">
