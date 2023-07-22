@@ -76,6 +76,7 @@ function App() {
               <Form.Control
                 placeholder="Hochony Shop"
                 className="no-outline"
+                name="searchInput"
                 onChange={(e) => {
                   e.preventDefault();
                   검색변경(e.target.value);
