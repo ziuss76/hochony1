@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.cf6fb926.css",
-    "main.js": "/static/js/main.23e5dd82.js",
+    "main.css": "/static/css/main.ac0ea513.css",
+    "main.js": "/static/js/main.69cc672a.js",
     "static/js/787.a428575f.chunk.js": "/static/js/787.a428575f.chunk.js",
     "static/media/hochonypic0.webp": "/static/media/hochonypic0.24ca1eecdcef7dfd791c.webp",
     "static/media/hochonybg3.webp": "/static/media/hochonybg3.37c5790fc776717d05f9.webp",
@@ -13,12 +13,12 @@
     "static/media/hochonylogin.webp": "/static/media/hochonylogin.40234c58f041d232cca4.webp",
     "static/media/hochoicon.png": "/static/media/hochoicon.f1e9039dd9d6217ffd42.png",
     "index.html": "/index.html",
-    "main.cf6fb926.css.map": "/static/css/main.cf6fb926.css.map",
-    "main.23e5dd82.js.map": "/static/js/main.23e5dd82.js.map",
+    "main.ac0ea513.css.map": "/static/css/main.ac0ea513.css.map",
+    "main.69cc672a.js.map": "/static/js/main.69cc672a.js.map",
     "787.a428575f.chunk.js.map": "/static/js/787.a428575f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf6fb926.css",
-    "static/js/main.23e5dd82.js"
+    "static/css/main.ac0ea513.css",
+    "static/js/main.69cc672a.js"
   ]
 }
