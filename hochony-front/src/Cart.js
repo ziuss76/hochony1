@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Button.scss";
 import { addCount, subCount, clearItems, orderUp } from "./store";
 import { Helmet } from "react-helmet-async";
+import DaumPostcode from "react-daum-postcode";
 
 function Cart() {
   let cartState = useSelector((state) => state.cart); // state 는 리덕스 전역 상태 객체
@@ -72,26 +73,51 @@ function Cart() {
 function 주문하기() {
   const [show, setShow] = useState(false);
   const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+  const [addressError, setAddressError] = useState("");
   const addressRef = useRef(null);
   const phoneNumberRef = useRef(null);
+  const addressDetailRef = useRef(null);
 
-  let cartState = useSelector((state) => state.cart);
-  let dispatch = useDispatch();
+  const cartState = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const phoneNumberPattern = /^010-[0-9]{4}-[0-9]{4}$/;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handlePhoneNumberChange = (event) => {
+    // 입력된 핸드폰 번호에서 숫자만 남기기
+    const phoneNumberValue = event.target.value.replace(/[^0-9]/g, "");
+    // 하이픈(-) 추가
+    const formattedPhoneNumber = phoneNumberValue.replace(/^(\d{3})(\d{4})(\d{4})$/, "$1-$2-$3");
+    setPhoneNumber(formattedPhoneNumber);
+  };
+
   const handleOrder = () => {
     const addressValue = addressRef.current.value;
     const phoneNumberValue = phoneNumberRef.current.value;
+    const addressDetailValue = addressDetailRef.current.value;
 
     setAddress(addressValue);
+    setAddressDetail(addressDetailValue);
+
+    if (address === "") {
+      setAddressError("주소를 검색해주세요!");
+      return;
+    }
+    if (!phoneNumberPattern.test(phoneNumberValue)) {
+      setPhoneNumberError("010-0000-0000 양식에 맞게 입력해주세요!");
+      return;
+    }
+    setPhoneNumberError("");
     setPhoneNumber(phoneNumberValue);
 
     const orderState = cartState.map((item) => ({
       ...item,
-      address: addressValue,
+      address: addressValue + " " + addressDetailValue,
       phoneNumber: phoneNumberValue,
     }));
 
@@ -99,10 +125,16 @@ function 주문하기() {
 
     // dispatch로 보낸 뒤 세 값을 초기화
     setAddress("");
+    setAddressDetail("");
     setPhoneNumber("");
     dispatch(clearItems(cartState));
 
     handleClose();
+  };
+
+  const onCompletePost = (data) => {
+    setAddress(data.address);
+    setAddressError("");
   };
 
   return (
@@ -113,17 +145,29 @@ function 주문하기() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>주소랑 번호 적으셈</Modal.Title>
+          <Modal.Title>주소와 번호를 알려주세요</Modal.Title>
         </Modal.Header>
         <Form>
           <Form.Group className="p-3" controlId="formGridAddress1">
+            <DaumPostcode onComplete={onCompletePost} className="mb-2"></DaumPostcode>
             <Form.Label>주소</Form.Label>
-            <Form.Control ref={addressRef} defaultValue={""} placeholder="호천로 1번길 83 106동 301호" />
-            <Form.Label className="mt-3">전화번호</Form.Label>
-            <Form.Control ref={phoneNumberRef} defaultValue={""} placeholder="01012345678" />
+            <Form.Control isInvalid={!!addressError} className="no-outline" ref={addressRef} value={address} defaultValue={""} placeholder="위 주소 검색창을 사용해주세요!" />
+            <Form.Control.Feedback type="invalid">{addressError}</Form.Control.Feedback>
+            <Form.Label className="mt-2">상세 주소(선택)</Form.Label>
+            <Form.Control className="no-outline" ref={addressDetailRef} defaultValue={""} placeholder="106동 301호" />
+            <Form.Label className="mt-2">전화번호</Form.Label>
+            <Form.Control
+              isInvalid={!!phoneNumberError}
+              value={phoneNumber}
+              onChange={handlePhoneNumberChange}
+              className="no-outline"
+              ref={phoneNumberRef}
+              defaultValue={""}
+              placeholder="01012345678"
+            />
+            <Form.Control.Feedback type="invalid">{phoneNumberError}</Form.Control.Feedback>
           </Form.Group>
         </Form>
-        <Modal.Body>호천이도 주소는 알아야 새벽배송을 가지;;😅</Modal.Body>
         <Modal.Footer>
           <button className="buttonGray" role="button" onClick={handleClose}>
             닫기

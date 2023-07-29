@@ -19,11 +19,15 @@ clientsClaim();
 // Their URLs are injected into the manifest variable below.
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
+
+// 웹 앱의 리소스들을 서비스 워커가 설치될 때(웹 앱이 브라우저에 최초로 로드될 때) 미리 캐싱하는 기능
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
+
+// 해당 요청 경로에 대한 캐싱 전략이나 다양한 동작들을 설정하여 웹 앱의 성능을 최적화
 const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
-import Data from "./Data/firstHochoData"; // Data 자리엔 자유롭게 작명가능
+import Data from "./Data/firstHochoData";
 import Detail from "./Detail";
 import Cart from "./Cart";
 import Main from "./Main";
