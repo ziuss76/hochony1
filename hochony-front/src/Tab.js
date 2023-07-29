@@ -5,7 +5,7 @@ import "./Button.scss";
 import axios from "axios";
 import { Rating } from "react-simple-star-rating";
 
-function Tab({ 누른탭, 스위치변경, id }) {
+function Tab({ 누른탭, 스위치변경, id, userDetail }) {
   const [show, setShow] = useState(false);
   const [modalKind, modalKind변경] = useState("");
   const [modalTitle, modalTitle변경] = useState("");
@@ -38,7 +38,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
 
   useEffect(() => {
     스위치변경(true);
-  });
+  }, []);
 
   const handleClose = () => setShow(false);
 
@@ -77,6 +77,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
         </div>
 
         {서버리뷰.map((a, i) => {
+          const isCurrentUserReview = userDetail?.name === 서버리뷰[i].유저네임;
           return (
             <div className="product-box p-4 m-1">
               <Rating size={30} initialValue={서버리뷰[i].점수} readonly={true} />
@@ -86,52 +87,56 @@ function Tab({ 누른탭, 스위치변경, id }) {
                   <Card.Text>{서버리뷰[i].내용}</Card.Text>
                 </Card.Body>
               </Card>
-              <button
-                className="buttonRed mt-3"
-                style={{ width: "85px" }}
-                type="submit"
-                role="button"
-                aria-label="buttonDelete"
-                onClick={() => {
-                  setShow(true);
-                  삭제할것변경({ data: 서버리뷰[i] });
-                  modalKind변경("삭제");
-                  modalTitle변경("호천이가 삭제를 허락했습니다!");
-                  modalBody변경("이봐 휴먼, 다음엔 더 잘 써주라구😼");
-                }}
-              >
-                삭제하기
-              </button>
+              {isCurrentUserReview && (
+                <button
+                  className="buttonRed mt-3"
+                  style={{ width: "85px" }}
+                  type="submit"
+                  role="button"
+                  aria-label="buttonDelete"
+                  onClick={() => {
+                    setShow(true);
+                    삭제할것변경({ data: 서버리뷰[i] });
+                    modalKind변경("삭제");
+                    modalTitle변경("호천이가 삭제를 허락했습니다!");
+                    modalBody변경("이봐 휴먼, 다음엔 더 잘 써주라구😼");
+                  }}
+                >
+                  삭제하기
+                </button>
+              )}
 
-              <button
-                className="buttonGreen mt-3"
-                style={{ width: "85px" }}
-                type="submit"
-                role="button"
-                aria-label="buttonChange"
-                onClick={() => {
-                  setShow(true);
-                  수정중id변경(서버리뷰[i]._id);
-                  modalKind변경("수정");
-                  modalTitle변경("호천이가 수정을 허락했습니다!");
-                  modalBody변경(
-                    <Container>
-                      <Rating onClick={handleRating} rating={별점} />
-                      <InputGroup
-                        className="mt-1"
-                        onChange={(e) => {
-                          e.preventDefault();
-                          리뷰변경(e.target.value);
-                        }}
-                      >
-                        <Form.Control as="textarea" rows={6} placeholder="수정할 내용으로 적어주세요!" />
-                      </InputGroup>
-                    </Container>
-                  );
-                }}
-              >
-                수정하기
-              </button>
+              {isCurrentUserReview && (
+                <button
+                  className="buttonGreen mt-3"
+                  style={{ width: "85px" }}
+                  type="submit"
+                  role="button"
+                  aria-label="buttonChange"
+                  onClick={() => {
+                    setShow(true);
+                    수정중id변경(서버리뷰[i]._id);
+                    modalKind변경("수정");
+                    modalTitle변경("호천이가 수정을 허락했습니다!");
+                    modalBody변경(
+                      <Container>
+                        <Rating onClick={handleRating} rating={별점} />
+                        <InputGroup
+                          className="mt-1"
+                          onChange={(e) => {
+                            e.preventDefault();
+                            리뷰변경(e.target.value);
+                          }}
+                        >
+                          <Form.Control as="textarea" rows={6} placeholder="수정할 내용으로 적어주세요!" />
+                        </InputGroup>
+                      </Container>
+                    );
+                  }}
+                >
+                  수정하기
+                </button>
+              )}
             </div>
           );
         })}
@@ -158,7 +163,7 @@ function Tab({ 누른탭, 스위치변경, id }) {
                       .then((결과) => console.log(결과))
                       .catch(() => console.log("실패"))
                   : axios
-                      .post(`/postReview/${id}`, [별점, 리뷰])
+                      .post(`/postReview/${id}`, [별점, 리뷰, userDetail.name])
                       .then((결과) => console.log(결과))
                       .catch(() => console.log("실패"));
                 handleClose();

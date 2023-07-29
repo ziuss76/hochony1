@@ -122,12 +122,13 @@ app.post("/postReview/:id", (req, res) => {
   const id = req.params.id;
   const rating = req.body[0];
   const review = req.body[1];
+  const userName = req.body[2];
 
   db.collection("ReviewCount").findOne({ name: "게시물개수" }, (err, result) => {
     const 총게시물개수 = result.totalPost;
 
     db.collection("ReviewCount").updateOne({ name: "게시물개수" }, { $inc: { totalPost: 1 } }, (err, result) => {
-      db.collection("Review").insertOne({ _id: 총게시물개수 + 1, id: parseInt(id), 점수: rating, 내용: review }, () => {
+      db.collection("Review").insertOne({ _id: 총게시물개수 + 1, id: parseInt(id), 점수: rating, 내용: review, 유저네임: userName }, () => {
         res.send("전송완료");
       });
     });

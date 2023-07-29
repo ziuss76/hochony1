@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Nav, Container } from "react-bootstrap";
 import "./Detail.css";
 import "./Button.scss";
@@ -13,6 +14,20 @@ function Detail({ hochony }) {
   const [alert, alert변경] = useState(true);
   const [누른탭, 누른탭변경] = useState(0);
   const [스위치, 스위치변경] = useState(false);
+  const [userDetail, userDetail변경] = useState(null);
+
+  const navigate = useNavigate();
+  const { id } = useParams(); // {id}는 :id 자리에 있던 숫자
+  const 찾은상품 = hochony.find((상품) => 상품.id === parseInt(id)); // 상품.id 가 :id 자리의 숫자와 같은 상품을 찾아줌
+
+  useEffect(() => {
+    const 유저디테일 = JSON.parse(sessionStorage.getItem("userDetail"));
+    if (유저디테일 === null) {
+      navigate("/login");
+    } else {
+      userDetail변경(유저디테일);
+    }
+  }, []);
 
   useEffect(() => {
     const 타이머 = setTimeout(() => {
@@ -22,10 +37,6 @@ function Detail({ hochony }) {
       clearTimeout(타이머); // 2초 전에 나갔을 때 버그 방지용, 이전 타이머 꺼서 중첩 방지
     };
   }, []);
-
-  const navigate = useNavigate();
-  const { id } = useParams(); // {id}는 :id 자리에 있던 숫자
-  const 찾은상품 = hochony.find((상품) => 상품.id === parseInt(id)); // 상품.id 가 :id 자리의 숫자와 같은 상품을 찾아줌
 
   return (
     <>
@@ -126,7 +137,7 @@ function Detail({ hochony }) {
           </Nav.Item>
         </Nav>
       </Container>
-      <Tab 누른탭={누른탭} 스위치변경={스위치변경} id={id} />
+      <Tab 누른탭={누른탭} 스위치변경={스위치변경} id={id} userDetail={userDetail} />
     </>
   );
 }
