@@ -1,7 +1,6 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Badge } from "react-bootstrap";
 import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import Card from "./Card";
 import Carousel from "./Carousel";
 import "./Button.scss";
@@ -48,7 +47,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
   return (
     <>
       <Carousel />
-      <div className="container">
+      <Container className="col-lg-10">
         <div className="row">
           {hochony.map((a, i) => {
             return <Card hochony={hochony[i]} i={i} key={i} />; //hochony 중에 hochony[i] 만 전송한다
@@ -69,7 +68,7 @@ function Main({ hochony, hochony변경, 구글로그인, 구글로그인변경, 
             </div>
           </>
         )}
-      </div>
+      </Container>
     </>
   );
 }

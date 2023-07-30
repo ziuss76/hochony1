@@ -126,6 +126,7 @@ function App() {
 
       <Routes>
         <Route
+          exact
           path="/"
           element={
             <Main
@@ -140,7 +141,7 @@ function App() {
             />
           }
         />
-        <Route path="/detail/:id" element={<Detail hochony={hochony} />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
       </Routes>

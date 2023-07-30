@@ -65,6 +65,18 @@ app.get("/content", (req, res) => {
     });
 });
 
+app.get("/content/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  db.collection("Data").findOne({ id: parseInt(id) }, (err, result) => {
+    if (result) {
+      res.json(result);
+    } else {
+      res.status(404).json({ message: "Content not found" });
+    }
+  });
+});
+
 app.get("/search", (req, res) => {
   let 검색조건 = [];
   if (!req.query.value) {

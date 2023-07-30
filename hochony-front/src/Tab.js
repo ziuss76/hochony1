@@ -48,7 +48,7 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
 
   if (누른탭 === 0) {
     return (
-      <Container className="col-lg-4">
+      <>
         <div className="product-box">
           <Rating onClick={handleRating} rating={별점} />
           <InputGroup
@@ -174,11 +174,11 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
             </button>
           </Modal.Footer>
         </Modal>
-      </Container>
+      </>
     );
   } else if (누른탭 === 1) {
     return (
-      <Container className="col-md-4">
+      <>
         <div className="product-box">
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
@@ -255,11 +255,11 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
             </div>
           </div>
         </div>
-      </Container>
+      </>
     );
   } else if (누른탭 === 2) {
     return (
-      <Container className="col-md-4">
+      <>
         <div className="product-box">
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
@@ -334,7 +334,7 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
             </div>
           </div>
         </div>
-      </Container>
+      </>
     );
   }
 }

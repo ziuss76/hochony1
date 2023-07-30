@@ -1,5 +1,6 @@
 import { Container, Badge } from "react-bootstrap";
 import "./Button.scss";
+import "./Detail.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleLogin } from "@react-oauth/google";
