@@ -17,30 +17,41 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
   const [별점, 별점변경] = useState(0);
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get(`/getReview/${id}`)
-        .then((result) => {
-          서버리뷰변경([...result.data]);
-          // console.log([...result.data]);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    };
-
-    const timeoutId = setTimeout(fetchData, 100); // 최대 60ms 걸리길래 이렇게 했더니 다시 잘 동작함
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [show]);
-
-  useEffect(() => {
     스위치변경(true);
+    fetchReview();
   }, []);
 
-  const handleClose = () => setShow(false);
+  const fetchReview = async () => {
+    try {
+      const result = await axios.get(`/getReview/${id}`);
+      서버리뷰변경([...result.data]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleConfirm = async () => {
+    try {
+      if (modalKind === "수정") {
+        const result = await axios.put("/putReview", [수정중id, 별점, 리뷰]);
+        // console.log(result);
+      } else if (modalKind === "삭제") {
+        const result = await axios.delete("/deleteReview", 삭제할것);
+        // console.log(result);
+      } else {
+        const result = await axios.post(`/postReview/${id}`, [별점, 리뷰, userDetail.name]);
+        // console.log(result);
+      }
+      await fetchReview();
+      handleClose();
+    } catch (error) {
+      console.log("실패");
+    }
+  };
 
   const handleRating = (rate) => {
     별점변경(rate);
@@ -76,70 +87,71 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
           </button>
         </div>
 
-        {서버리뷰.map((a, i) => {
-          const isCurrentUserReview = userDetail?.name === 서버리뷰[i].유저네임;
-          return (
-            <div className="product-box p-4 m-1">
-              <Rating size={30} initialValue={서버리뷰[i].점수} readonly={true} />
-              <Card className="mt-3">
-                <Card.Body>
-                  <Card.Title>{i + 1} 번째 리뷰</Card.Title>
-                  <Card.Text>{서버리뷰[i].내용}</Card.Text>
-                </Card.Body>
-              </Card>
-              {isCurrentUserReview && (
-                <button
-                  className="buttonRed mt-3"
-                  style={{ width: "85px" }}
-                  type="submit"
-                  role="button"
-                  aria-label="buttonDelete"
-                  onClick={() => {
-                    setShow(true);
-                    삭제할것변경({ data: 서버리뷰[i] });
-                    modalKind변경("삭제");
-                    modalTitle변경("호천이가 삭제를 허락했습니다!");
-                    modalBody변경("이봐 휴먼, 다음엔 더 잘 써주라구😼");
-                  }}
-                >
-                  삭제하기
-                </button>
-              )}
+        {서버리뷰.length > 0 &&
+          서버리뷰.map((a, i) => {
+            const isCurrentUserReview = userDetail?.name === 서버리뷰[i].유저네임;
+            return (
+              <div className="product-box p-4 m-1">
+                <Rating size={30} initialValue={서버리뷰[i].점수} readonly={true} />
+                <Card className="mt-3">
+                  <Card.Body>
+                    <Card.Title>{i + 1} 번째 리뷰</Card.Title>
+                    <Card.Text>{서버리뷰[i].내용}</Card.Text>
+                  </Card.Body>
+                </Card>
+                {isCurrentUserReview && (
+                  <button
+                    className="buttonRed mt-3"
+                    style={{ width: "85px" }}
+                    type="submit"
+                    role="button"
+                    aria-label="buttonDelete"
+                    onClick={() => {
+                      setShow(true);
+                      삭제할것변경({ data: 서버리뷰[i] });
+                      modalKind변경("삭제");
+                      modalTitle변경("호천이가 삭제를 허락했습니다!");
+                      modalBody변경("이봐 휴먼, 다음엔 더 잘 써주라구😼");
+                    }}
+                  >
+                    삭제하기
+                  </button>
+                )}
 
-              {isCurrentUserReview && (
-                <button
-                  className="buttonGreen mt-3"
-                  style={{ width: "85px" }}
-                  type="submit"
-                  role="button"
-                  aria-label="buttonChange"
-                  onClick={() => {
-                    setShow(true);
-                    수정중id변경(서버리뷰[i]._id);
-                    modalKind변경("수정");
-                    modalTitle변경("호천이가 수정을 허락했습니다!");
-                    modalBody변경(
-                      <Container>
-                        <Rating onClick={handleRating} rating={별점} />
-                        <InputGroup
-                          className="mt-1"
-                          onChange={(e) => {
-                            e.preventDefault();
-                            리뷰변경(e.target.value);
-                          }}
-                        >
-                          <Form.Control as="textarea" rows={6} placeholder="수정할 내용으로 적어주세요!" />
-                        </InputGroup>
-                      </Container>
-                    );
-                  }}
-                >
-                  수정하기
-                </button>
-              )}
-            </div>
-          );
-        })}
+                {isCurrentUserReview && (
+                  <button
+                    className="buttonGreen mt-3"
+                    style={{ width: "85px" }}
+                    type="submit"
+                    role="button"
+                    aria-label="buttonChange"
+                    onClick={() => {
+                      setShow(true);
+                      수정중id변경(서버리뷰[i]._id);
+                      modalKind변경("수정");
+                      modalTitle변경("호천이가 수정을 허락했습니다!");
+                      modalBody변경(
+                        <Container>
+                          <Rating onClick={handleRating} rating={별점} />
+                          <InputGroup
+                            className="mt-1"
+                            onChange={(e) => {
+                              e.preventDefault();
+                              리뷰변경(e.target.value);
+                            }}
+                          >
+                            <Form.Control as="textarea" rows={6} placeholder="수정할 내용으로 적어주세요!" />
+                          </InputGroup>
+                        </Container>
+                      );
+                    }}
+                  >
+                    수정하기
+                  </button>
+                )}
+              </div>
+            );
+          })}
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -147,29 +159,7 @@ function Tab({ 누른탭, 스위치변경, id, userDetail }) {
           </Modal.Header>
           <Modal.Body>{modalBody}</Modal.Body>
           <Modal.Footer>
-            <button
-              className="buttonPink"
-              role="button"
-              aria-label="buttonConfirm"
-              onClick={() => {
-                modalKind === "수정"
-                  ? axios
-                      .put("/putReview", [수정중id, 별점, 리뷰])
-                      .then((결과) => console.log(결과))
-                      .catch(() => console.log("실패"))
-                  : modalKind === "삭제"
-                  ? axios
-                      .delete("/deleteReview", 삭제할것)
-                      .then((결과) => console.log(결과))
-                      .catch(() => console.log("실패"))
-                  : axios
-                      .post(`/postReview/${id}`, [별점, 리뷰, userDetail.name])
-                      .then((결과) => console.log(결과))
-                      .catch(() => console.log("실패"));
-                handleClose();
-                //window.location.reload() 이거 대신에 useEffect 써서 show 변할 때만 get요청
-              }}
-            >
+            <button className="buttonPink" role="button" aria-label="buttonConfirm" onClick={handleConfirm}>
               완료하기
             </button>
           </Modal.Footer>
