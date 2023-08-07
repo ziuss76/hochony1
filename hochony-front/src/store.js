@@ -13,7 +13,7 @@ let cart = createSlice({
       let found = state.findIndex((cartItem) => {
         return cartItem.id == action.payload.id;
       });
-      console.log(found, action.payload.id);
+      // console.log(found, action.payload.id);
       // 같은 상품을 또 추가하면 왜 수량추가가 아닌 새 1개가 또 push 될까? 장바구니버튼 dispatch로 보냈던 action.payload는 객체고 .id를 붙여야 했다
       if (found >= 0) {
         state[found].quan++;
@@ -26,7 +26,7 @@ let cart = createSlice({
       let found = state.findIndex((cartItem) => {
         return cartItem.id == action.payload;
       });
-      console.log(found, action.payload); // 왜 action.payload.id 는 여기서 undefined 이지? +1 버튼에 dispatch 에서 a.id로 보냈으니까
+      // console.log(found, action.payload); // 왜 action.payload.id 는 여기서 undefined 이지? +1 버튼에 dispatch 에서 a.id로 보냈으니까
       if (found >= 0) {
         state[found].quan++;
       }

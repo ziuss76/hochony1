@@ -26,7 +26,7 @@ function Detail() {
       .get(`/content/${id}`)
       .then((result) => {
         찾은상품변경(result.data);
-        console.log(result.data);
+        // console.log(result.data);
       })
       .catch(() => {
         console.log("불러오기 실패!");
