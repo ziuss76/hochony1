@@ -2,6 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import "./Button.scss";
+import "./Detail.css";
 
 function Card({ hochony }) {
   let navigate = useNavigate();

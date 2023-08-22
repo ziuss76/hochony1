@@ -1,19 +1,20 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navbar, Container, Nav, Form, InputGroup } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, InputGroup, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faUser, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Link, Route, Routes } from "react-router-dom";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import Data from "./Data/firstHochoData";
-import Detail from "./Detail";
-import Cart from "./Cart";
-import Main from "./Main";
-import Login from "./Login";
 import "./Button.scss";
 import axios from "axios";
 import ScrollTop from "./ScrollTop";
 import { Helmet } from "react-helmet-async";
+
+const Main = lazy(() => import("./Main"));
+const Detail = lazy(() => import("./Detail"));
+const Cart = lazy(() => import("./Cart"));
+const Login = lazy(() => import("./Login"));
 
 function App() {
   const [hochony, hochony변경] = useState(Data); //Data는 data.js 에 있는 데이터 전체
@@ -123,28 +124,35 @@ function App() {
 
       {/* Switch 쓰면 하나하나 exact 안 붙여도 됨! 6버전 이후로 Switch => Routes */}
       <ScrollTop />
-
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <Main
-              hochony={hochony}
-              hochony변경={hochony변경}
-              더보기={더보기}
-              더보기변경={더보기변경}
-              구글로그인={구글로그인}
-              구글로그인변경={구글로그인변경}
-              로그인완료={로그인완료}
-              로그인완료변경={로그인완료변경}
-            />
-          }
-        />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Suspense
+        fallback={
+          <div className="loading-spinner">
+            <Spinner animation="border" />
+          </div>
+        }
+      >
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Main
+                hochony={hochony}
+                hochony변경={hochony변경}
+                더보기={더보기}
+                더보기변경={더보기변경}
+                구글로그인={구글로그인}
+                구글로그인변경={구글로그인변경}
+                로그인완료={로그인완료}
+                로그인완료변경={로그인완료변경}
+              />
+            }
+          />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }

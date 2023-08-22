@@ -99,3 +99,9 @@ img {
 .addressStyle {
   margin-bottom: 10px;
 }
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면의 높이를 100%로 설정하여 수직 가운데 정렬 */
+}
