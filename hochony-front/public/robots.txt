@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-Sitemap: https://hochony.com/sitemap.xml
+Sitemap: https://port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app/sitemap.xml

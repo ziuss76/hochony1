@@ -14,7 +14,7 @@ app.use(
   cors({
     // * 대신 true 쓰는 이유: 브라우저가 요청을 보내는 도메인 (Origin)을 확인할 수 있게 해주고
     // 나중에 서버에서 허용할 도메인을 동적으로 결정할 수 있도록 함, 그래서 확장성에도 유리
-    origin: ["hochony.com", "http://localhost:8080"],
+    origin: ["port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app", "http://localhost:8080"],
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // 나중에 쿠키에 저장된 인증정보를 함께 전송할 때 필요함

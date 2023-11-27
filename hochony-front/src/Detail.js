@@ -56,7 +56,7 @@ function Detail() {
       {찾은상품 && (
         <Helmet>
           <title>{`Hochony #${찾은상품.id}`}</title>
-          <link rel="canonical" href={"https://hochony.com" + "/detail/" + 찾은상품.id} />
+          <link rel="canonical" href={"https://port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app" + "/detail/" + 찾은상품.id} />
           <meta name="title" content={`${찾은상품.title}`}></meta>
           <meta name="content" content={`${찾은상품.content}`}></meta>
         </Helmet>

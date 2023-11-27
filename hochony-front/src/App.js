@@ -65,7 +65,7 @@ function App() {
     <div className="App">
       <Helmet>
         <title>Hochony Shop</title>
-        <link rel="canonical" href="https://hochony.com" />
+        <link rel="canonical" href="https://port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app" />
       </Helmet>
       <Navbar sticky="top" bg="light" variant="light" className={`navbar ${!showNavbar ? "slide-up" : "slide-down"}`}>
         <Container fluid>

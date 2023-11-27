@@ -14,7 +14,7 @@ function Cart() {
     <Container className="col-lg-6">
       <Helmet>
         <title>Hochony Cart</title>
-        <link rel="canonical" href="https://hochony.com/cart" />
+        <link rel="canonical" href="https://port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app/cart" />
       </Helmet>
       <Table>
         <thead>

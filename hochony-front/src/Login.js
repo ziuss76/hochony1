@@ -42,7 +42,7 @@ function Login() {
     <>
       <Helmet>
         <title>Hochony Login</title>
-        <link rel="canonical" href="https://hochony.com/login" />
+        <link rel="canonical" href="https://port-0-hochony1-1jmcjt27lb8p5idq.gksl2.cloudtype.app/login" />
       </Helmet>
       {userDetail ? (
         <>
